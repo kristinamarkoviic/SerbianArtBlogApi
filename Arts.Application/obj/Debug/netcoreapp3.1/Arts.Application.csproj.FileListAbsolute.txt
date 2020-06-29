@@ -1,0 +1,12 @@
+C:\Users\krism\source\repos\Arts\Arts.Application\bin\Debug\netcoreapp3.1\Arts.Application.deps.json
+C:\Users\krism\source\repos\Arts\Arts.Application\bin\Debug\netcoreapp3.1\Arts.Application.dll
+C:\Users\krism\source\repos\Arts\Arts.Application\bin\Debug\netcoreapp3.1\Arts.Application.pdb
+C:\Users\krism\source\repos\Arts\Arts.Application\bin\Debug\netcoreapp3.1\Arts.Domain.dll
+C:\Users\krism\source\repos\Arts\Arts.Application\bin\Debug\netcoreapp3.1\Arts.Domain.pdb
+C:\Users\krism\source\repos\Arts\Arts.Application\obj\Debug\netcoreapp3.1\Arts.Application.csprojAssemblyReference.cache
+C:\Users\krism\source\repos\Arts\Arts.Application\obj\Debug\netcoreapp3.1\Arts.Application.AssemblyInfoInputs.cache
+C:\Users\krism\source\repos\Arts\Arts.Application\obj\Debug\netcoreapp3.1\Arts.Application.AssemblyInfo.cs
+C:\Users\krism\source\repos\Arts\Arts.Application\obj\Debug\netcoreapp3.1\Arts.Application.csproj.CopyComplete
+C:\Users\krism\source\repos\Arts\Arts.Application\obj\Debug\netcoreapp3.1\Arts.Application.dll
+C:\Users\krism\source\repos\Arts\Arts.Application\obj\Debug\netcoreapp3.1\Arts.Application.pdb
+C:\Users\krism\source\repos\Arts\Arts.Application\obj\Debug\netcoreapp3.1\Arts.Application.csproj.CoreCompileInputs.cache

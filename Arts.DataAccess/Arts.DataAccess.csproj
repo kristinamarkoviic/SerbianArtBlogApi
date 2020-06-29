@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200613105126_Initial setup, adding users and countries.cs" />
+    <Compile Remove="Migrations\20200613105126_Initial setup, adding users and countries.Designer.cs" />
+    <Compile Remove="Migrations\20200613115249_Initial setup for users and countries, set Foreign key.cs" />
+    <Compile Remove="Migrations\20200613115249_Initial setup for users and countries, set Foreign key.Designer.cs" />
+    <Compile Remove="Migrations\20200613130747_Initial setup for users and countries, set Foreign key.cs" />
+    <Compile Remove="Migrations\20200613130747_Initial setup for users and countries, set Foreign key.Designer.cs" />
+    <Compile Remove="Migrations\20200627213448_Is something to megrate.cs" />
+    <Compile Remove="Migrations\20200627213448_Is something to megrate.Designer.cs" />
+    <Compile Remove="Migrations\20200628174207_Adding comments and configuration for comments.cs" />
+    <Compile Remove="Migrations\20200628174207_Adding comments and configuration for comments.Designer.cs" />
+    <Compile Remove="Migrations\20200628234602_Adding new configuration for piece of arts and users for comments.cs" />
+    <Compile Remove="Migrations\20200628234602_Adding new configuration for piece of arts and users for comments.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Arts.Domain\Arts.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

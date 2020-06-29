@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "a04YE2NVaJCqwA+2GStDLqPIRvzRAy7b7G+cRvCk/yeB88G3994FZxYtNdAiMXsetLnhryCHC/xE5l48q5a/0w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\krism\\source\\repos\\Arts\\Arts.Application\\Arts.Application.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\krism\\.nuget\\packages\\microsoft.aspnetcore.http.features\\3.1.5\\microsoft.aspnetcore.http.features.3.1.5.nupkg.sha512",
+    "C:\\Users\\krism\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.5\\microsoft.extensions.primitives.3.1.5.nupkg.sha512",
+    "C:\\Users\\krism\\.nuget\\packages\\system.io.pipelines\\4.7.1\\system.io.pipelines.4.7.1.nupkg.sha512"
+  ],
+  "logs": []
+}
