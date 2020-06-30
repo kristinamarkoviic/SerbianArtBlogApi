@@ -1,0 +1,701 @@
+USE [arts]
+GO
+/****** Object:  Table [dbo].[__EFMigrationsHistory]    Script Date: 6/30/2020 10:47:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[__EFMigrationsHistory](
+	[MigrationId] [nvarchar](150) NOT NULL,
+	[ProductVersion] [nvarchar](32) NOT NULL,
+ CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY CLUSTERED 
+(
+	[MigrationId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Categories]    Script Date: 6/30/2020 10:47:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Categories](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CreatedAt] [datetime2](7) NOT NULL,
+	[ModifiedAt] [datetime2](7) NULL,
+	[IsDeleted] [bit] NOT NULL,
+	[DeletedAt] [datetime2](7) NULL,
+	[Name] [nvarchar](30) NOT NULL,
+ CONSTRAINT [PK_Categories] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Comments]    Script Date: 6/30/2020 10:47:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Comments](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CreatedAt] [datetime2](7) NOT NULL,
+	[ModifiedAt] [datetime2](7) NULL,
+	[IsDeleted] [bit] NOT NULL,
+	[DeletedAt] [datetime2](7) NULL,
+	[Text] [nvarchar](max) NOT NULL,
+	[PieceOfArtId] [int] NOT NULL,
+	[ParentId] [int] NULL,
+	[UserId] [int] NOT NULL,
+ CONSTRAINT [PK_Comments] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Countries]    Script Date: 6/30/2020 10:47:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Countries](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CreatedAt] [datetime2](7) NOT NULL,
+	[ModifiedAt] [datetime2](7) NULL,
+	[IsDeleted] [bit] NOT NULL,
+	[DeletedAt] [datetime2](7) NULL,
+	[Name] [nvarchar](30) NOT NULL,
+ CONSTRAINT [PK_Countries] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Likes]    Script Date: 6/30/2020 10:47:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Likes](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CreatedAt] [datetime2](7) NOT NULL,
+	[ModifiedAt] [datetime2](7) NULL,
+	[IsDeleted] [bit] NOT NULL,
+	[DeletedAt] [datetime2](7) NULL,
+	[UserId] [int] NOT NULL,
+	[PieceOfArtId] [int] NOT NULL,
+	[Status] [int] NOT NULL,
+ CONSTRAINT [PK_Likes] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PieceOfArts]    Script Date: 6/30/2020 10:47:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PieceOfArts](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CreatedAt] [datetime2](7) NOT NULL,
+	[ModifiedAt] [datetime2](7) NULL,
+	[IsDeleted] [bit] NOT NULL,
+	[DeletedAt] [datetime2](7) NULL,
+	[Name] [nvarchar](45) NOT NULL,
+	[Description] [nvarchar](255) NULL,
+	[Year] [int] NOT NULL,
+	[Picture] [nvarchar](max) NULL,
+	[CategoryId] [int] NOT NULL,
+	[UserId] [int] NOT NULL,
+	[Price] [decimal](18, 2) NOT NULL,
+ CONSTRAINT [PK_PieceOfArts] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[UseCaseLogs]    Script Date: 6/30/2020 10:47:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UseCaseLogs](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Date] [datetime2](7) NOT NULL,
+	[UseCaseName] [nvarchar](max) NULL,
+	[Data] [nvarchar](max) NULL,
+	[Actor] [nvarchar](max) NULL,
+ CONSTRAINT [PK_UseCaseLogs] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Users]    Script Date: 6/30/2020 10:47:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Users](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CreatedAt] [datetime2](7) NOT NULL,
+	[ModifiedAt] [datetime2](7) NULL,
+	[IsDeleted] [bit] NOT NULL,
+	[DeletedAt] [datetime2](7) NULL,
+	[FirstName] [nvarchar](15) NOT NULL,
+	[LastName] [nvarchar](20) NOT NULL,
+	[Email] [nvarchar](450) NOT NULL,
+	[Password] [nvarchar](max) NULL,
+	[PhoneNumber] [nvarchar](25) NULL,
+	[CountryId] [int] NOT NULL,
+ CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[UserUseCases]    Script Date: 6/30/2020 10:47:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserUseCases](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NOT NULL,
+	[UseCaseId] [int] NOT NULL,
+ CONSTRAINT [PK_UserUseCases] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20200613133619_Initial setup for users and countries, set Foreign key', N'3.1.5')
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20200613144900_Adding configuration for users columns and conutry columns', N'3.1.5')
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20200613184319_Adding phone number max length', N'3.1.5')
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20200613192237_Adding table for user use cases and connect them with configuration in users', N'3.1.5')
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20200613211126_Adding table usecaselogs ', N'3.1.5')
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20200626170944_Adding category table and configuration for columns', N'3.1.5')
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20200626174514_Adding piece of arts and configuration for piece of arts with categories and users', N'3.1.5')
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20200626175121_Adding configuration for categories and pieceofarts ', N'3.1.5')
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20200628174522_Adding comments and configuration for comments', N'3.1.5')
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20200628222535_Adding text column to be string for comments', N'3.1.5')
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20200629220830_Adding likes and configration', N'3.1.5')
+GO
+SET IDENTITY_INSERT [dbo].[Categories] ON 
+
+INSERT [dbo].[Categories] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name]) VALUES (1, CAST(N'2020-06-27T00:24:29.9376544' AS DateTime2), NULL, 0, NULL, N'Akrilik')
+INSERT [dbo].[Categories] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name]) VALUES (2, CAST(N'2020-06-27T00:24:37.1533766' AS DateTime2), CAST(N'2020-06-27T00:38:34.1740847' AS DateTime2), 1, CAST(N'2020-06-27T00:38:34.1398501' AS DateTime2), N'Category2')
+INSERT [dbo].[Categories] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name]) VALUES (3, CAST(N'2020-06-27T00:24:43.5635613' AS DateTime2), CAST(N'2020-06-27T00:51:16.8579103' AS DateTime2), 0, NULL, N'CatTestUpdate')
+INSERT [dbo].[Categories] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name]) VALUES (4, CAST(N'2020-06-27T23:31:50.7719580' AS DateTime2), NULL, 0, NULL, N'Grafika')
+INSERT [dbo].[Categories] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name]) VALUES (5, CAST(N'2020-06-27T23:31:50.7719580' AS DateTime2), NULL, 0, NULL, N'Pastel')
+INSERT [dbo].[Categories] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name]) VALUES (6, CAST(N'2020-06-25T23:31:50.7719580' AS DateTime2), NULL, 0, NULL, N'Tempera')
+INSERT [dbo].[Categories] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name]) VALUES (7, CAST(N'2020-06-27T23:31:50.7719580' AS DateTime2), NULL, 0, NULL, N'Ulje')
+INSERT [dbo].[Categories] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name]) VALUES (8, CAST(N'2020-06-27T23:31:50.7719580' AS DateTime2), NULL, 0, NULL, N'Kombinovano')
+INSERT [dbo].[Categories] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name]) VALUES (9, CAST(N'2020-06-27T23:31:50.7719580' AS DateTime2), NULL, 0, NULL, N'Vodene boje')
+INSERT [dbo].[Categories] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name]) VALUES (12, CAST(N'2020-06-27T23:31:50.7719580' AS DateTime2), NULL, 0, NULL, N'Jajcana tempera')
+INSERT [dbo].[Categories] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name]) VALUES (13, CAST(N'2020-06-27T23:31:50.7719580' AS DateTime2), NULL, 0, NULL, N'Mastilo')
+INSERT [dbo].[Categories] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name]) VALUES (14, CAST(N'2020-06-27T23:31:50.7719580' AS DateTime2), NULL, 0, NULL, N'Olovka')
+SET IDENTITY_INSERT [dbo].[Categories] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Comments] ON 
+
+INSERT [dbo].[Comments] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Text], [PieceOfArtId], [ParentId], [UserId]) VALUES (1, CAST(N'2020-06-29T00:26:08.7650176' AS DateTime2), NULL, 0, NULL, N'PrimerKomentar', 13, NULL, 5)
+INSERT [dbo].[Comments] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Text], [PieceOfArtId], [ParentId], [UserId]) VALUES (2, CAST(N'2020-06-29T00:26:16.3511121' AS DateTime2), NULL, 0, NULL, N'PrimerKomentarDrugi', 13, NULL, 5)
+INSERT [dbo].[Comments] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Text], [PieceOfArtId], [ParentId], [UserId]) VALUES (3, CAST(N'2020-06-29T00:26:21.8512640' AS DateTime2), CAST(N'2020-06-29T00:47:26.5145581' AS DateTime2), 0, NULL, N'UpdateheckOutsdas', 13, NULL, 5)
+INSERT [dbo].[Comments] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Text], [PieceOfArtId], [ParentId], [UserId]) VALUES (4, CAST(N'2020-06-29T00:26:28.4868291' AS DateTime2), NULL, 0, NULL, N'PrimerKomentarDrugiTreciiiiWwewewew', 13, NULL, 6)
+INSERT [dbo].[Comments] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Text], [PieceOfArtId], [ParentId], [UserId]) VALUES (5, CAST(N'2020-06-29T00:26:34.6752172' AS DateTime2), NULL, 0, NULL, N'ASp', 13, NULL, 6)
+INSERT [dbo].[Comments] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Text], [PieceOfArtId], [ParentId], [UserId]) VALUES (6, CAST(N'2020-06-29T00:27:17.5754383' AS DateTime2), NULL, 0, NULL, N'ASpPodfwffdsfdsfdfsfdsfs', 13, 2, 5)
+INSERT [dbo].[Comments] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Text], [PieceOfArtId], [ParentId], [UserId]) VALUES (7, CAST(N'2020-06-29T00:27:27.0564804' AS DateTime2), CAST(N'2020-06-29T00:45:07.8942439' AS DateTime2), 0, NULL, N'UpdateheckOut', 13, NULL, 5)
+INSERT [dbo].[Comments] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Text], [PieceOfArtId], [ParentId], [UserId]) VALUES (8, CAST(N'2020-06-29T00:27:35.0010977' AS DateTime2), CAST(N'2020-06-29T00:32:12.3312031' AS DateTime2), 1, CAST(N'2020-06-29T00:32:12.3008365' AS DateTime2), N'Primerdadadad', 13, 2, 6)
+INSERT [dbo].[Comments] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Text], [PieceOfArtId], [ParentId], [UserId]) VALUES (9, CAST(N'2020-06-29T00:27:41.7077492' AS DateTime2), NULL, 0, NULL, N'Exampledsdsd', 13, 2, 5)
+INSERT [dbo].[Comments] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Text], [PieceOfArtId], [ParentId], [UserId]) VALUES (10, CAST(N'2020-06-29T00:27:49.8452681' AS DateTime2), CAST(N'2020-06-29T00:29:45.1070737' AS DateTime2), 1, CAST(N'2020-06-29T00:29:45.0869914' AS DateTime2), N'Kicakiciac', 13, 1, 5)
+INSERT [dbo].[Comments] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Text], [PieceOfArtId], [ParentId], [UserId]) VALUES (11, CAST(N'2020-06-29T00:27:59.4018368' AS DateTime2), CAST(N'2020-06-29T00:30:07.2485941' AS DateTime2), 1, CAST(N'2020-06-29T00:30:07.2482077' AS DateTime2), N'See', 13, NULL, 5)
+SET IDENTITY_INSERT [dbo].[Comments] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Countries] ON 
+
+INSERT [dbo].[Countries] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name]) VALUES (1, CAST(N'2020-06-14T20:22:51.8274578' AS DateTime2), NULL, 0, NULL, N'Serbia')
+INSERT [dbo].[Countries] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name]) VALUES (2, CAST(N'2020-06-14T20:22:51.8274578' AS DateTime2), NULL, 0, NULL, N'Montenegro')
+INSERT [dbo].[Countries] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name]) VALUES (3, CAST(N'2020-06-14T17:22:42.8711125' AS DateTime2), NULL, 0, NULL, N'Croatia')
+INSERT [dbo].[Countries] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name]) VALUES (4, CAST(N'2020-06-14T20:22:51.8274578' AS DateTime2), NULL, 0, NULL, N'Bosnia and Herzegovina')
+INSERT [dbo].[Countries] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name]) VALUES (8, CAST(N'2020-06-22T20:22:51.8274578' AS DateTime2), NULL, 0, NULL, N'North Macedonia')
+INSERT [dbo].[Countries] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name]) VALUES (9, CAST(N'2020-06-22T20:22:51.8274578' AS DateTime2), NULL, 0, NULL, N'Italy')
+INSERT [dbo].[Countries] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name]) VALUES (10, CAST(N'2020-06-20T20:22:51.8274578' AS DateTime2), NULL, 0, NULL, N'Romania')
+INSERT [dbo].[Countries] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name]) VALUES (11, CAST(N'2020-06-22T20:22:51.8274578' AS DateTime2), NULL, 0, NULL, N'Slovenia ')
+SET IDENTITY_INSERT [dbo].[Countries] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Likes] ON 
+
+INSERT [dbo].[Likes] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [UserId], [PieceOfArtId], [Status]) VALUES (1, CAST(N'2020-06-30T01:19:05.3635192' AS DateTime2), CAST(N'2020-06-30T01:38:11.0236569' AS DateTime2), 0, NULL, 30, 1, 1)
+INSERT [dbo].[Likes] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [UserId], [PieceOfArtId], [Status]) VALUES (2, CAST(N'2020-06-30T01:19:28.2780573' AS DateTime2), NULL, 0, NULL, 30, 2, 2)
+INSERT [dbo].[Likes] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [UserId], [PieceOfArtId], [Status]) VALUES (3, CAST(N'2020-06-30T01:19:31.6272047' AS DateTime2), NULL, 0, NULL, 30, 3, 2)
+INSERT [dbo].[Likes] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [UserId], [PieceOfArtId], [Status]) VALUES (4, CAST(N'2020-06-30T01:19:41.6208361' AS DateTime2), NULL, 0, NULL, 30, 27, 2)
+INSERT [dbo].[Likes] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [UserId], [PieceOfArtId], [Status]) VALUES (5, CAST(N'2020-06-30T01:19:41.6208361' AS DateTime2), NULL, 0, NULL, 30, 25, 1)
+INSERT [dbo].[Likes] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [UserId], [PieceOfArtId], [Status]) VALUES (6, CAST(N'2020-06-27T00:00:00.0000000' AS DateTime2), NULL, 0, NULL, 30, 22, 1)
+INSERT [dbo].[Likes] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [UserId], [PieceOfArtId], [Status]) VALUES (7, CAST(N'2020-06-27T00:00:00.0000000' AS DateTime2), NULL, 0, NULL, 9, 22, 1)
+INSERT [dbo].[Likes] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [UserId], [PieceOfArtId], [Status]) VALUES (8, CAST(N'2020-06-27T00:00:00.0000000' AS DateTime2), NULL, 0, NULL, 9, 19, 1)
+INSERT [dbo].[Likes] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [UserId], [PieceOfArtId], [Status]) VALUES (9, CAST(N'2020-06-27T00:00:00.0000000' AS DateTime2), NULL, 0, NULL, 9, 13, 1)
+SET IDENTITY_INSERT [dbo].[Likes] OFF
+GO
+SET IDENTITY_INSERT [dbo].[PieceOfArts] ON 
+
+INSERT [dbo].[PieceOfArts] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name], [Description], [Year], [Picture], [CategoryId], [UserId], [Price]) VALUES (1, CAST(N'2020-06-27T23:39:09.8125125' AS DateTime2), NULL, 0, NULL, N'Kap', N'Original acrylic Painting on Hardboard..
+Unframed..Mixed with my handwritten sheets from my notebook ...
+The painting is varnished for protection and durability......', 2000, N'efa2e7a8-a0b5-4d19-bbea-446e605d5e57.png', 1, 9, CAST(29.00 AS Decimal(18, 2)))
+INSERT [dbo].[PieceOfArts] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name], [Description], [Year], [Picture], [CategoryId], [UserId], [Price]) VALUES (2, CAST(N'2020-06-27T23:45:59.5643867' AS DateTime2), NULL, 0, NULL, N'Living The Moment', N'Original acrylic Painting on Hardboard..
+Unframed..Mixed with my handwritten sheets from my notebook ...
+The painting is varnished for protection and durability......', 2006, N'be83b851-9e9c-47d5-9c74-9be8a14c8fdd.png', 5, 9, CAST(115.00 AS Decimal(18, 2)))
+INSERT [dbo].[PieceOfArts] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name], [Description], [Year], [Picture], [CategoryId], [UserId], [Price]) VALUES (3, CAST(N'2020-06-27T23:49:46.2482491' AS DateTime2), NULL, 0, NULL, N'Lost in TIme', N'Original acrylic Painting on Hardboard..
+Unframed..Mixed with my handwritten sheets from my notebook ...
+The painting is varnished for protection and durability......', 2010, N'8fb456fe-aed2-43b0-938d-115aa259c6ba.png', 6, 9, CAST(85.00 AS Decimal(18, 2)))
+INSERT [dbo].[PieceOfArts] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name], [Description], [Year], [Picture], [CategoryId], [UserId], [Price]) VALUES (4, CAST(N'2020-06-27T23:54:00.1379357' AS DateTime2), NULL, 0, NULL, N'Open Your Heart', N'Original acrylic Painting on Hardboard..
+Unframed..Mixed with my handwritten sheets from my notebook ...
+The painting is varnished for protection and durability......', 2011, N'781f94db-bb33-459f-8205-c1689dada084.png', 6, 8, CAST(45.00 AS Decimal(18, 2)))
+INSERT [dbo].[PieceOfArts] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name], [Description], [Year], [Picture], [CategoryId], [UserId], [Price]) VALUES (5, CAST(N'2020-06-27T23:55:04.8002736' AS DateTime2), CAST(N'2020-06-28T03:55:55.2682479' AS DateTime2), 1, CAST(N'2020-06-28T03:55:55.2452976' AS DateTime2), N'Never Let Me Go', N'Original acrylic Painting on Hardboard..
+Unframed..Mixed with my handwritten sheets from my notebook ...
+The painting is varnished for protection and durability......', 2012, N'781f94db-bb33-459f-8205-c1689dada084.png', 8, 29, CAST(99.00 AS Decimal(18, 2)))
+INSERT [dbo].[PieceOfArts] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name], [Description], [Year], [Picture], [CategoryId], [UserId], [Price]) VALUES (6, CAST(N'2020-06-28T00:01:58.2273256' AS DateTime2), NULL, 0, CAST(N'2020-06-28T01:43:16.4747711' AS DateTime2), N'In These Arms', N'Original acrylic Painting on Hardboard..
+Unframed..Mixed with my handwritten sheets from my notebook ...
+The painting is varnished for protection and durability......', 2013, N'efa2e7a8-a0b5-4d19-bbea-446e605d5e57.png', 8, 29, CAST(85.00 AS Decimal(18, 2)))
+INSERT [dbo].[PieceOfArts] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name], [Description], [Year], [Picture], [CategoryId], [UserId], [Price]) VALUES (10, CAST(N'2020-06-28T00:01:58.2273256' AS DateTime2), CAST(N'2020-06-28T13:12:17.1860235' AS DateTime2), 0, NULL, N'Fly me to the Moon', N'Original acrylic Painting on Hardboard..
+Unframed..Mixed with my handwritten sheets from my notebook ...
+The painting is varnished for protection and durability......', 2020, N'be83b851-9e9c-47d5-9c74-9be8a14c8fdd.png', 9, 30, CAST(112.00 AS Decimal(18, 2)))
+INSERT [dbo].[PieceOfArts] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name], [Description], [Year], [Picture], [CategoryId], [UserId], [Price]) VALUES (13, CAST(N'2020-06-28T04:13:04.4476624' AS DateTime2), NULL, 0, NULL, N'Magical Place', N'Original acrylic Painting on Hardboard..
+Unframed..Mixed with my handwritten sheets from my notebook ...
+The painting is varnished for protection and durability......', 2019, N'8fb456fe-aed2-43b0-938d-115aa259c6ba.png', 12, 30, CAST(18.00 AS Decimal(18, 2)))
+INSERT [dbo].[PieceOfArts] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name], [Description], [Year], [Picture], [CategoryId], [UserId], [Price]) VALUES (19, CAST(N'2020-06-28T04:13:04.4476624' AS DateTime2), NULL, 0, NULL, N'Shadow of the Moon', N'Original acrylic Painting on Hardboard..
+Unframed..Mixed with my handwritten sheets from my notebook ...
+The painting is varnished for protection and durability......', 2010, N'8fb456fe-aed2-43b0-938d-115aa259c6ba.png', 12, 30, CAST(15.00 AS Decimal(18, 2)))
+INSERT [dbo].[PieceOfArts] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name], [Description], [Year], [Picture], [CategoryId], [UserId], [Price]) VALUES (22, CAST(N'2020-06-28T04:13:04.4476624' AS DateTime2), NULL, 0, NULL, N'Vogue', N'Original acrylic Painting on Hardboard..
+Unframed..Mixed with my handwritten sheets from my notebook ...
+The painting is varnished for protection and durability......', 2005, N'efa2e7a8-a0b5-4d19-bbea-446e605d5e57.png', 12, 30, CAST(22.00 AS Decimal(18, 2)))
+INSERT [dbo].[PieceOfArts] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name], [Description], [Year], [Picture], [CategoryId], [UserId], [Price]) VALUES (25, CAST(N'2020-06-27T23:54:00.1379357' AS DateTime2), NULL, 0, NULL, N'Water Lilies', N'Original acrylic Painting on Hardboard..
+Unframed..Mixed with my handwritten sheets from my notebook ...
+The painting is varnished for protection and durability......', 2010, N'efa2e7a8-a0b5-4d19-bbea-446e605d5e57.png', 4, 8, CAST(12.00 AS Decimal(18, 2)))
+INSERT [dbo].[PieceOfArts] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name], [Description], [Year], [Picture], [CategoryId], [UserId], [Price]) VALUES (27, CAST(N'2020-06-28T04:13:04.4476624' AS DateTime2), NULL, 0, NULL, N'Urban Love', N'Original acrylic Painting on Hardboard..
+Unframed..Mixed with my handwritten sheets from my notebook ...
+The painting is varnished for protection and durability......', 2019, N'efa2e7a8-a0b5-4d19-bbea-446e605d5e57.png', 4, 29, CAST(47.00 AS Decimal(18, 2)))
+SET IDENTITY_INSERT [dbo].[PieceOfArts] OFF
+GO
+SET IDENTITY_INSERT [dbo].[UseCaseLogs] ON 
+
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (1, CAST(N'2020-06-14T00:12:41.2677190' AS DateTime2), N'User Registration', N'{"FirstName":null,"LastName":null,"Email":null,"Password":null,"PhoneNumber":null}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (2, CAST(N'2020-06-14T00:15:58.8723121' AS DateTime2), N'User Registration', N'{"FirstName":"Kica","LastName":"Markovic","Email":"kris.markovic98@gmail.com","Password":"password123","PhoneNumber":null}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (3, CAST(N'2020-06-14T00:20:20.0464368' AS DateTime2), N'User Registration', N'{"FirstName":"Kica","LastName":"Markovic","Email":"kris.markovic98@gmail.com","Password":"password123","PhoneNumber":null}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (4, CAST(N'2020-06-14T00:29:10.4891755' AS DateTime2), N'User Registration', N'{"FirstName":"Kica","LastName":"Markovic","Email":"kris.markovic98@gmail.com","Password":"password123","PhoneNumber":null}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (5, CAST(N'2020-06-14T00:41:09.2696096' AS DateTime2), N'User Registration', N'{"FirstName":"Kica","LastName":"Markovic","Email":"kris.markovic98@gmail.com","Password":"password123","PhoneNumber":null,"CountryId":0}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (6, CAST(N'2020-06-14T00:42:11.0770032' AS DateTime2), N'User Registration', N'{"FirstName":"Kica","LastName":"Markovic","Email":"kris.markovic98@gmail.com","Password":"password123","PhoneNumber":null,"CountryId":0}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (7, CAST(N'2020-06-14T00:42:51.6542456' AS DateTime2), N'User Registration', N'{"FirstName":"Kica","LastName":"Markovic","Email":"kris.markovic98@gmail.com","Password":"password123","PhoneNumber":null,"CountryId":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (8, CAST(N'2020-06-14T13:29:05.9839929' AS DateTime2), N'User Registration', N'{"FirstName":"Kristina","LastName":"Markovic","Email":"kris.markovic98@gmail.com","Password":"password123","PhoneNumber":null,"CountryId":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (9, CAST(N'2020-06-14T14:30:21.1309784' AS DateTime2), N'Create new country using EF.', N'{"Name":null}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (10, CAST(N'2020-06-14T14:33:36.1371882' AS DateTime2), N'User Registration', N'{"FirstName":null,"LastName":null,"Email":null,"Password":null,"PhoneNumber":null,"CountryId":0}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (11, CAST(N'2020-06-14T14:34:12.9160361' AS DateTime2), N'Create new country using EF.', N'{"Name":"Montenegro"}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (12, CAST(N'2020-06-14T15:41:45.2091900' AS DateTime2), N'Create Users Use Case', N'{"Id":0,"UserId":4,"UseCaseId":3}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (13, CAST(N'2020-06-14T15:44:32.8516483' AS DateTime2), N'Create Users Use Case', N'{"Id":0,"UserId":4,"UseCaseId":3}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (14, CAST(N'2020-06-14T15:45:54.1303127' AS DateTime2), N'Create Users Use Case', N'{"Id":0,"UserId":4,"UseCaseId":3}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (15, CAST(N'2020-06-14T15:47:05.8814271' AS DateTime2), N'Create Users Use Case', N'{"Id":0,"UserId":4,"UseCaseId":3}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (16, CAST(N'2020-06-14T15:49:56.5786171' AS DateTime2), N'Create Users Use Case', N'{"Id":0,"UserId":4,"UseCaseId":3}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (17, CAST(N'2020-06-14T15:53:03.2916751' AS DateTime2), N'Create Users Use Case', N'{"Id":0,"UserId":4,"UseCaseId":3}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (18, CAST(N'2020-06-14T16:01:04.2374014' AS DateTime2), N'Create Users Use Case', N'{"Id":0,"UserId":0,"UseCaseId":0}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (19, CAST(N'2020-06-14T16:12:07.7561687' AS DateTime2), N'Create Users Use Case', N'{"Id":0,"UserId":0,"UseCaseId":0}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (20, CAST(N'2020-06-14T16:13:28.4976358' AS DateTime2), N'Create Users Use Case', N'{"Id":0,"UserId":0,"UseCaseId":0}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (21, CAST(N'2020-06-14T16:17:25.5786101' AS DateTime2), N'Create Users Use Case', N'{"Id":0,"UserId":4,"UseCaseId":3}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (22, CAST(N'2020-06-14T16:45:54.2081961' AS DateTime2), N'Delete Users Use Case', N'5', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (23, CAST(N'2020-06-14T16:46:17.4980572' AS DateTime2), N'Delete Users Use Case', N'4', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (24, CAST(N'2020-06-14T17:14:31.7780054' AS DateTime2), N'Create new country using EF.', N'{"Name":"Montenegro"}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (25, CAST(N'2020-06-14T17:17:53.1589696' AS DateTime2), N'Create new country using EF.', N'{"Name":"Montenegro"}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (26, CAST(N'2020-06-14T17:22:42.3334268' AS DateTime2), N'Create new country using EF.', N'{"Name":"Croatia"}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (27, CAST(N'2020-06-14T18:17:44.6025101' AS DateTime2), N'Delete Country using Ef.', N'2', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (28, CAST(N'2020-06-14T18:22:51.1862194' AS DateTime2), N'Create new country using EF.', N'{"Id":null,"Name":"Makedonija"}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (29, CAST(N'2020-06-14T18:23:18.4524468' AS DateTime2), N'Delete Country using Ef.', N'4', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (30, CAST(N'2020-06-15T20:57:57.0959797' AS DateTime2), N'Countries Search', N'{"Name":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (31, CAST(N'2020-06-15T20:58:22.3243569' AS DateTime2), N'Countries Search', N'{"Name":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (32, CAST(N'2020-06-15T20:58:27.9265731' AS DateTime2), N'Countries Search', N'{"Name":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (33, CAST(N'2020-06-15T20:58:53.6536776' AS DateTime2), N'Countries Search', N'{"Name":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (34, CAST(N'2020-06-15T20:59:30.8117338' AS DateTime2), N'Countries Search', N'{"Name":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (35, CAST(N'2020-06-15T20:59:40.1435160' AS DateTime2), N'Countries Search', N'{"Name":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (36, CAST(N'2020-06-15T20:59:48.4599221' AS DateTime2), N'Countries Search', N'{"Name":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (37, CAST(N'2020-06-15T20:59:55.2035477' AS DateTime2), N'Countries Search', N'{"Name":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (38, CAST(N'2020-06-15T21:00:01.0062546' AS DateTime2), N'Countries Search', N'{"Name":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (39, CAST(N'2020-06-15T21:00:28.5253635' AS DateTime2), N'Countries Search', N'{"Name":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (40, CAST(N'2020-06-15T21:00:34.6088066' AS DateTime2), N'Countries Search', N'{"Name":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (41, CAST(N'2020-06-15T21:00:42.8563028' AS DateTime2), N'Countries Search', N'{"Name":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (42, CAST(N'2020-06-16T19:04:12.9680522' AS DateTime2), N'Search Audit Log', N'{"Actor":"kris","UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (43, CAST(N'2020-06-16T19:04:44.4519845' AS DateTime2), N'Search Audit Log', N'{"Actor":"kris","UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (44, CAST(N'2020-06-16T19:05:21.9174077' AS DateTime2), N'Search Audit Log', N'{"Actor":"kris","UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (45, CAST(N'2020-06-16T19:07:39.6454624' AS DateTime2), N'Search Audit Log', N'{"Actor":"kris","UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (46, CAST(N'2020-06-16T19:08:48.8018507' AS DateTime2), N'Search Audit Log', N'{"Actor":"kris","UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (47, CAST(N'2020-06-16T19:09:20.7511149' AS DateTime2), N'Search Audit Log', N'{"Actor":"=kris","UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (48, CAST(N'2020-06-16T19:09:34.6456625' AS DateTime2), N'Search Audit Log', N'{"Actor":"=kris","UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (49, CAST(N'2020-06-16T19:10:32.2940339' AS DateTime2), N'Search Audit Log', N'{"Actor":"kris","UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (50, CAST(N'2020-06-16T19:13:01.1151675' AS DateTime2), N'Search Audit Log', N'{"Actor":"kris","UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (51, CAST(N'2020-06-16T19:18:56.0557333' AS DateTime2), N'Search Audit Log', N'{"Actor":"kris","UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (52, CAST(N'2020-06-16T19:22:18.5686413' AS DateTime2), N'Search Audit Log', N'{"Actor":"kris","UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (53, CAST(N'2020-06-16T19:25:05.4026820' AS DateTime2), N'Search Audit Log', N'{"Actor":"kris","UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (54, CAST(N'2020-06-16T19:26:06.1942370' AS DateTime2), N'Search Audit Log', N'{"Actor":"kris","UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (55, CAST(N'2020-06-16T19:40:44.2026349' AS DateTime2), N'Search Audit Log', N'{"Actor":"kris","UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (56, CAST(N'2020-06-16T19:41:33.4565784' AS DateTime2), N'Search Audit Log', N'{"Actor":"kris","UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":10,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (57, CAST(N'2020-06-16T19:55:26.5426988' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":"Create","DateStart":null,"DateEnd":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (58, CAST(N'2020-06-16T19:55:36.1154308' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":"Create","DateStart":null,"DateEnd":null,"PerPage":5,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (59, CAST(N'2020-06-16T19:56:00.7753838' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (60, CAST(N'2020-06-16T19:56:19.7719518' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (61, CAST(N'2020-06-16T19:56:47.1012596' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (62, CAST(N'2020-06-16T19:57:12.8338263' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":30,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (63, CAST(N'2020-06-16T19:57:23.2939392' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":30,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (64, CAST(N'2020-06-16T19:57:46.9254932' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":30,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (65, CAST(N'2020-06-16T19:57:52.7095737' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":30,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (66, CAST(N'2020-06-16T19:58:00.9265778' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":60,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (67, CAST(N'2020-06-16T19:58:27.0299935' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":60,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (68, CAST(N'2020-06-16T19:59:03.0416023' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (69, CAST(N'2020-06-16T19:59:19.5532817' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (70, CAST(N'2020-06-16T19:59:23.8858091' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":null,"DateEnd":null,"PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (71, CAST(N'2020-06-16T20:00:06.2902110' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":"2020-15-06","DateEnd":"2020-16-06","PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (72, CAST(N'2020-06-16T20:00:57.0038648' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":"2020-15-06","DateEnd":"2020-16-06","PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (73, CAST(N'2020-06-16T20:03:13.9888364' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":"2020-15-06","DateEnd":"2020-16-06","PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (74, CAST(N'2020-06-16T20:03:44.1586833' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":"2020-15-06","DateEnd":"2020-16-06","PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (75, CAST(N'2020-06-16T20:04:42.8748852' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":"2020-06-15","DateEnd":"2020-06-16","PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (76, CAST(N'2020-06-16T20:05:50.7054279' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":"2020-06-15","DateEnd":"2020-06-14","PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (77, CAST(N'2020-06-16T20:06:18.2383480' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":"2020-06-15","DateEnd":"2020-06-14","PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (78, CAST(N'2020-06-16T20:06:33.0810272' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":"2020-06-14","DateEnd":"2020-06-18","PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (79, CAST(N'2020-06-16T20:07:16.1709812' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":"2020-06-14","DateEnd":"2020-06-18 perPage=30","PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (80, CAST(N'2020-06-16T20:07:34.0690526' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":"2020-06-14","DateEnd":"2020-06-18,perPage=30","PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (81, CAST(N'2020-06-16T20:07:59.2093443' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":"2020-06-14","DateEnd":"2020-06-18@perPage=30","PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (82, CAST(N'2020-06-16T20:08:14.2362922' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":"2020-06-14","DateEnd":"2020-06-18?perPage=30","PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (83, CAST(N'2020-06-16T20:08:25.7614594' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":"2020-06-14","DateEnd":"2020-06-18%%perPage=30","PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (84, CAST(N'2020-06-16T20:08:41.5478944' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":"2020-06-14","DateEnd":"2020-06-18","PerPage":30,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (85, CAST(N'2020-06-16T20:08:56.7229814' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":"2020-06-16","DateEnd":"2020-06-18","PerPage":30,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (86, CAST(N'2020-06-16T20:09:11.3504316' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":"2020-06-16","DateEnd":"2020-06-16","PerPage":30,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (87, CAST(N'2020-06-16T20:09:24.3028557' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":"2020-06-16","DateEnd":"2020-06-17","PerPage":30,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (88, CAST(N'2020-06-16T20:09:37.8809070' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":"2020-06-13","DateEnd":"2020-06-14","PerPage":30,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (89, CAST(N'2020-06-16T20:09:45.0818513' AS DateTime2), N'Search Audit Log', N'{"Actor":null,"UseCaseName":null,"DateStart":"2020-06-13","DateEnd":"2020-06-14","PerPage":30,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (90, CAST(N'2020-06-16T20:21:03.1454241' AS DateTime2), N'Search Audit Log', N'{"Actor":"Ne","UseCaseName":null,"DateStart":"2020-06-13","DateEnd":"2020-06-14","PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (91, CAST(N'2020-06-16T20:21:36.5697772' AS DateTime2), N'Search Audit Log', N'{"Actor":"Ne","UseCaseName":null,"DateStart":"2020-06-13","DateEnd":"2020-06-14","PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (92, CAST(N'2020-06-16T20:21:45.8991902' AS DateTime2), N'Search Audit Log', N'{"Actor":"Ne","UseCaseName":null,"DateStart":"2020-06-13","DateEnd":"2020-06-14","PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (93, CAST(N'2020-06-16T20:22:03.1945551' AS DateTime2), N'Search Audit Log', N'{"Actor":"Ne","UseCaseName":null,"DateStart":"2020-06-14","DateEnd":"2020-06-16","PerPage":2,"Page":1}', N'kris.markovic98@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (94, CAST(N'2020-06-23T22:01:22.0764985' AS DateTime2), N'User Registration', N'{"FirstName":"Filip","LastName":"Minic","Email":"filip.minic.138.17@ict.edu.rs","Password":"password","PhoneNumber":null,"CountryId":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (95, CAST(N'2020-06-23T22:13:03.1329359' AS DateTime2), N'Search Audit Log', N'{"Actor":"Ne","UseCaseName":null,"DateStart":"2020-06-14","DateEnd":"2020-06-16","PerPage":2,"Page":1}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (96, CAST(N'2020-06-23T22:15:44.0215042' AS DateTime2), N'Search Audit Log', N'{"Actor":"Ne","UseCaseName":null,"DateStart":"2020-06-14","DateEnd":"2020-06-16","PerPage":2,"Page":1}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (97, CAST(N'2020-06-23T22:17:35.4677362' AS DateTime2), N'Countries Search', N'{"Name":null,"PerPage":2,"Page":1}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (98, CAST(N'2020-06-23T23:02:50.1059346' AS DateTime2), N'Update Country', N'{"Id":1,"Name":"Serbia"}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (99, CAST(N'2020-06-23T23:03:08.3694052' AS DateTime2), N'Update Country', N'{"Id":1,"Name":"Serbiaa"}', N'filip.minic.138.17@ict.edu.rs')
+GO
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (100, CAST(N'2020-06-23T23:06:17.9277838' AS DateTime2), N'Update Country', N'{"Id":1,"Name":"Serbiaa"}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (101, CAST(N'2020-06-23T23:11:00.4504118' AS DateTime2), N'Update Country', N'{"Id":1,"Name":"Serbiaa"}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (102, CAST(N'2020-06-23T23:19:13.9659145' AS DateTime2), N'Update Country', N'{"Id":1,"Name":"Serbiaa"}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (103, CAST(N'2020-06-23T23:28:47.1539994' AS DateTime2), N'Update Country', N'{"Id":1,"Name":"Serbiaa"}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (104, CAST(N'2020-06-23T23:29:15.5924687' AS DateTime2), N'Update Country', N'{"Id":1,"Name":"Serbia"}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (105, CAST(N'2020-06-24T21:49:51.4467655' AS DateTime2), N'Countries Search', N'{"Name":null,"PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (106, CAST(N'2020-06-24T21:51:09.6652285' AS DateTime2), N'Countries Search', N'{"Name":null,"PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (107, CAST(N'2020-06-24T21:51:26.2199206' AS DateTime2), N'Countries Search', N'{"Name":null,"PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (108, CAST(N'2020-06-24T21:51:53.5326395' AS DateTime2), N'Countries Search', N'{"Name":"Croatia","PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (109, CAST(N'2020-06-24T21:53:41.5164415' AS DateTime2), N'Update Country', N'{"Id":1,"Name":"Serbia"}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (110, CAST(N'2020-06-24T21:54:14.1394317' AS DateTime2), N'Update Country', N'{"Id":1,"Name":"Serbiaa"}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (111, CAST(N'2020-06-24T22:26:52.1231987' AS DateTime2), N'Countries Search', N'{"Name":"Croatia","PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (112, CAST(N'2020-06-24T22:27:01.3804481' AS DateTime2), N'Countries Search', N'{"Name":"M","PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (113, CAST(N'2020-06-24T22:27:08.5066930' AS DateTime2), N'Countries Search', N'{"Name":"S","PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (114, CAST(N'2020-06-24T22:27:13.2039569' AS DateTime2), N'Update Country', N'{"Id":1,"Name":"Serbia"}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (115, CAST(N'2020-06-24T22:27:16.6682208' AS DateTime2), N'Countries Search', N'{"Name":"S","PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (116, CAST(N'2020-06-24T22:29:27.8287849' AS DateTime2), N'Search Audit Log', N'{"Actor":"Ne","UseCaseName":null,"DateStart":"2020-06-14","DateEnd":"2020-06-16","PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (117, CAST(N'2020-06-24T22:35:12.5542036' AS DateTime2), N'Search Audit Log', N'{"Actor":"Ne","UseCaseName":null,"DateStart":"2020-06-14","DateEnd":"2020-06-16","PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (118, CAST(N'2020-06-24T22:35:42.2492701' AS DateTime2), N'Search Audit Log', N'{"Actor":"Ne","UseCaseName":null,"DateStart":"2020-06-14","DateEnd":"2020-06-16","PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (119, CAST(N'2020-06-24T22:38:11.7837307' AS DateTime2), N'Search Audit Log', N'{"Actor":"Ne","UseCaseName":null,"DateStart":"2020-06-14","DateEnd":"2020-06-16","PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (120, CAST(N'2020-06-24T22:41:43.9513175' AS DateTime2), N'Search Audit Log', N'{"Actor":"Ne","UseCaseName":null,"DateStart":"2020-06-14","DateEnd":"2020-06-16","PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (121, CAST(N'2020-06-24T22:52:04.7869070' AS DateTime2), N'Search Audit Log', N'{"Actor":"Ne","UseCaseName":null,"DateStart":"2020-06-14","DateEnd":"2020-06-16","PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (122, CAST(N'2020-06-24T23:46:50.2048673' AS DateTime2), N'Create User', N'{"FirstName":"Kica","LastName":"Kicic","Email":"kristina.markovic.1.17@ict.edu.rs","Password":"password","PhoneNumber":null,"CountryId":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (123, CAST(N'2020-06-24T23:47:57.7851262' AS DateTime2), N'Create User', N'{"FirstName":"Kica","LastName":"Kicic","Email":"kristina.markovic.1.17@ict.edu.rs","Password":"password","PhoneNumber":null,"CountryId":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (124, CAST(N'2020-06-25T00:01:19.3037487' AS DateTime2), N'Delete User', N'6', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (125, CAST(N'2020-06-25T00:02:01.2958220' AS DateTime2), N'Delete User', N'6', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (126, CAST(N'2020-06-25T20:26:58.3131706' AS DateTime2), N'Create User', N'{"Id":0,"FirstName":"Kica","LastName":"Kicic","Email":"kristina.markovic.1.17@ict.edu.rs","Password":"password","PhoneNumber":null,"CountryId":1,"useCasesForUser":[]}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (127, CAST(N'2020-06-25T20:28:40.1979623' AS DateTime2), N'Create User', N'{"Id":0,"FirstName":"Kica","LastName":"Kicic","Email":"kristina.markovic.1854.17@ict.edu.rs","Password":"password","PhoneNumber":null,"CountryId":1,"useCasesForUser":[]}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (128, CAST(N'2020-06-25T20:30:38.1708897' AS DateTime2), N'Create User', N'{"Id":0,"FirstName":"KiTestca","LastName":"Test","Email":"kristina.markovic.1854.17@ict.edu.rs","Password":"password","PhoneNumber":null,"CountryId":1,"useCasesForUser":[]}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (129, CAST(N'2020-06-25T20:31:06.0272132' AS DateTime2), N'Create User', N'{"Id":0,"FirstName":"KiTestca","LastName":"Test","Email":"kristina.markovic.18529284.17@ict.edu.rs","Password":"password","PhoneNumber":null,"CountryId":1,"useCasesForUser":[]}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (130, CAST(N'2020-06-25T20:35:15.7467428' AS DateTime2), N'Update User', N'{"Id":9,"FirstName":"TestTestTest","LastName":"Test","Email":"kristina.markovic.18529284.17@ict.edu.rs","Password":"password","PhoneNumber":null,"CountryId":1,"useCasesForUser":[]}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (131, CAST(N'2020-06-25T20:35:35.0889736' AS DateTime2), N'Update User', N'{"Id":9,"FirstName":"TestTestTest","LastName":"Test","Email":null,"Password":"password","PhoneNumber":null,"CountryId":1,"useCasesForUser":[]}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (132, CAST(N'2020-06-25T20:35:43.9620135' AS DateTime2), N'Update User', N'{"Id":9,"FirstName":"TestTestTest","LastName":"Test","Email":null,"Password":"password","PhoneNumber":null,"CountryId":1,"useCasesForUser":[]}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (133, CAST(N'2020-06-25T20:38:57.2269050' AS DateTime2), N'Update User', N'{"Id":9,"FirstName":"TestTestTest","LastName":"Test","Email":"kristina.markovic17@ict.edu.rs","Password":"password","PhoneNumber":null,"CountryId":1,"useCasesForUser":[]}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (134, CAST(N'2020-06-25T20:41:56.0731946' AS DateTime2), N'Update User', N'{"Id":9,"FirstName":"TestTestTest22222","LastName":"Test","Email":"kristina.markovic783667@ict.edu.rs","Password":"password","PhoneNumber":null,"CountryId":1,"useCasesForUser":[10,11,12]}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (135, CAST(N'2020-06-25T20:46:37.9522643' AS DateTime2), N'Update User', N'{"Id":9,"FirstName":"OvoJeDrugiTest","LastName":"Test","Email":"kristina.markovic783667@ict.edu.rs","Password":"password","PhoneNumber":null,"CountryId":1,"useCasesForUser":[10,11,12]}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (136, CAST(N'2020-06-25T20:52:34.6410708' AS DateTime2), N'Update User', N'{"Id":9,"FirstName":"OvoJeTreciTest","LastName":"Test","Email":"kristina.markovic783667@ict.edu.rs","Password":"password","PhoneNumber":null,"CountryId":1,"useCasesForUser":[10,11,12]}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (137, CAST(N'2020-06-25T20:52:52.9406743' AS DateTime2), N'Update User', N'{"Id":9,"FirstName":"OvoJeTreciTest","LastName":"Test","Email":"kristina85@ict.edu.rs","Password":"password","PhoneNumber":null,"CountryId":1,"useCasesForUser":[10,11,12]}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (138, CAST(N'2020-06-26T22:20:53.6440250' AS DateTime2), N'EfCreateCategoryCommand', N'{"Id":0,"Name":"Cat1"}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (139, CAST(N'2020-06-26T22:22:01.2036225' AS DateTime2), N'EfCreateCategoryCommand', N'{"Id":0,"Name":"Cat1"}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (140, CAST(N'2020-06-26T22:24:26.9663208' AS DateTime2), N'EfCreateCategoryCommand', N'{"Id":0,"Name":"Cat1"}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (141, CAST(N'2020-06-26T22:24:37.1374769' AS DateTime2), N'EfCreateCategoryCommand', N'{"Id":0,"Name":"Cat2"}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (142, CAST(N'2020-06-26T22:24:43.5507868' AS DateTime2), N'EfCreateCategoryCommand', N'{"Id":0,"Name":"Cat3"}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (143, CAST(N'2020-06-26T22:38:30.3882044' AS DateTime2), N'EfDeleteCategoryCommand', N'2', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (144, CAST(N'2020-06-26T22:49:28.7286955' AS DateTime2), N'EfUpdateCategoryCommand', N'{"Id":0,"Name":"CatTestUpdate"}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (145, CAST(N'2020-06-26T22:51:13.9367566' AS DateTime2), N'EfUpdateCategoryCommand', N'{"Id":3,"Name":"CatTestUpdate"}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (146, CAST(N'2020-06-26T23:42:11.6064030' AS DateTime2), N'EfGetCategoriesQuery', N'{"Name":null,"PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (147, CAST(N'2020-06-26T23:42:24.5103642' AS DateTime2), N'EfGetCategoriesQuery', N'{"Name":"cat1","PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (148, CAST(N'2020-06-27T01:21:41.3156058' AS DateTime2), N'EfGetOneUserQuery', N'4', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (149, CAST(N'2020-06-27T01:22:20.1351204' AS DateTime2), N'EfGetOneUserQuery', N'4', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (150, CAST(N'2020-06-27T01:22:55.7801331' AS DateTime2), N'EfGetSingleUserClientQuery', N'4', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (151, CAST(N'2020-06-27T01:34:09.9456907' AS DateTime2), N'EfGetSingleUserClientQuery', N'4', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (152, CAST(N'2020-06-27T01:34:20.7093973' AS DateTime2), N'EfGetOneUserQuery', N'4', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (153, CAST(N'2020-06-27T01:35:23.8513074' AS DateTime2), N'EfGetSingleUserClientQuery', N'4', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (154, CAST(N'2020-06-27T11:24:35.8203919' AS DateTime2), N'EfGetUsersQuery', N'{"FirstName":"kris","LastName":null,"Email":null,"PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (155, CAST(N'2020-06-27T11:36:13.6980262' AS DateTime2), N'EfGetUsersQuery', N'{"FirstName":"kris","LastName":null,"Email":null,"PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (156, CAST(N'2020-06-27T11:43:50.1691160' AS DateTime2), N'EfGetUsersQuery', N'{"FirstName":"kris","LastName":null,"Email":null,"PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (157, CAST(N'2020-06-27T11:44:01.5812180' AS DateTime2), N'EfGetUsersQuery', N'{"FirstName":"test","LastName":null,"Email":null,"PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (158, CAST(N'2020-06-27T11:44:16.5198116' AS DateTime2), N'EfGetUsersQuery', N'{"FirstName":"a","LastName":null,"Email":"kr","PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (159, CAST(N'2020-06-27T11:44:40.9658458' AS DateTime2), N'EfGetUsersQuery', N'{"FirstName":"a","LastName":null,"Email":"kr?itemsPerPage=1","PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (160, CAST(N'2020-06-27T11:44:51.1513507' AS DateTime2), N'EfGetUsersQuery', N'{"FirstName":"a","LastName":null,"Email":"kr","PerPage":2,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (161, CAST(N'2020-06-27T11:45:22.8651164' AS DateTime2), N'EfGetUsersQuery', N'{"FirstName":"a","LastName":null,"Email":"kr","PerPage":1,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (162, CAST(N'2020-06-27T11:45:37.5272654' AS DateTime2), N'EfGetUsersQuery', N'{"FirstName":"a","LastName":null,"Email":"kr","PerPage":1,"Page":2}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (163, CAST(N'2020-06-27T11:46:03.8737977' AS DateTime2), N'EfGetUsersClientQuery', N'{"FirstName":"a","LastName":null,"Email":"kr","PerPage":1,"Page":2}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (164, CAST(N'2020-06-27T11:46:13.8251753' AS DateTime2), N'EfGetUsersClientQuery', N'{"FirstName":"a","LastName":null,"Email":"kr","PerPage":3,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (165, CAST(N'2020-06-27T12:00:57.2921102' AS DateTime2), N'EfGetUsersClientQuery', N'{"FirstName":"a","LastName":null,"Email":"kr","PerPage":3,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (166, CAST(N'2020-06-27T12:01:06.5501198' AS DateTime2), N'EfGetUsersQuery', N'{"FirstName":"a","LastName":null,"Email":"kr","PerPage":1,"Page":2}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (167, CAST(N'2020-06-27T12:02:36.9337435' AS DateTime2), N'EfGetUsersQuery', N'{"FirstName":"a","LastName":null,"Email":"kr","PerPage":1,"Page":2}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (168, CAST(N'2020-06-27T12:02:46.5968153' AS DateTime2), N'EfGetUsersClientQuery', N'{"FirstName":"a","LastName":null,"Email":"kr","PerPage":3,"Page":1}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (169, CAST(N'2020-06-27T21:14:51.5939770' AS DateTime2), N'EfCreatePieceOfArtCommand', N'{"Id":0,"Name":"Name","Description":"Minimum  15 karaktera test proba","Year":2020,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"banner-1.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"banner-1.png\""],"Content-Type":["image/png"]},"Length":100835,"Name":"Picture","FileName":"banner-1.png"},"CategoryId":1,"UserId":5,"Price":0.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (170, CAST(N'2020-06-27T21:15:18.4185716' AS DateTime2), N'EfCreatePieceOfArtCommand', N'{"Id":0,"Name":"Name","Description":"Minimum  15 karaktera test proba","Year":999,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"card2.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"card2.png\""],"Content-Type":["image/png"]},"Length":19387,"Name":"Picture","FileName":"card2.png"},"CategoryId":1,"UserId":5,"Price":0.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (171, CAST(N'2020-06-27T21:15:38.7544999' AS DateTime2), N'EfCreatePieceOfArtCommand', N'{"Id":0,"Name":"Name","Description":"Minimum  15 karaktera test proba","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"card2.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"card2.png\""],"Content-Type":["image/png"]},"Length":19387,"Name":"Picture","FileName":"card2.png"},"CategoryId":1,"UserId":5,"Price":0.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (172, CAST(N'2020-06-27T21:29:10.6356371' AS DateTime2), N'EfCreatePieceOfArtCommand', N'{"Id":0,"Name":"Name","Description":"Minimum  15 karaktera test proba","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"card2.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"card2.png\""],"Content-Type":["image/png"]},"Length":19387,"Name":"Picture","FileName":"card2.png"},"CategoryId":1,"UserId":5,"Price":25.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (173, CAST(N'2020-06-27T21:31:47.8016627' AS DateTime2), N'EfCreateCategoryCommand', N'{"Id":0,"Name":"Cat5"}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (174, CAST(N'2020-06-27T21:39:09.2626885' AS DateTime2), N'EfCreatePieceOfArtCommand', N'{"Id":0,"Name":"Name","Description":"Minimum  15 karaktera test proba","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"card2.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"card2.png\""],"Content-Type":["image/png"]},"Length":19387,"Name":"Picture","FileName":"card2.png"},"CategoryId":1,"UserId":5,"Price":25.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (175, CAST(N'2020-06-27T21:45:06.1539301' AS DateTime2), N'EfCreatePieceOfArtCommand', N'{"Id":0,"Name":"Name","Description":"Minimum  15 karaktera test proba","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"card2.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"card2.png\""],"Content-Type":["image/png"]},"Length":19387,"Name":"Picture","FileName":"card2.png"},"CategoryId":1,"UserId":5,"Price":25.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (176, CAST(N'2020-06-27T21:45:31.3568578' AS DateTime2), N'EfCreatePieceOfArtCommand', N'{"Id":0,"Name":"Name","Description":"Minimum  15 karaktera test proba","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"card2.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"card2.png\""],"Content-Type":["image/png"]},"Length":19387,"Name":"Picture","FileName":"card2.png"},"CategoryId":1,"UserId":5,"Price":25.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (177, CAST(N'2020-06-27T21:45:59.4345536' AS DateTime2), N'EfCreatePieceOfArtCommand', N'{"Id":0,"Name":"Seconddddddd","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"card2.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"card2.png\""],"Content-Type":["image/png"]},"Length":19387,"Name":"Picture","FileName":"card2.png"},"CategoryId":1,"UserId":5,"Price":25.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (178, CAST(N'2020-06-27T21:49:45.6300935' AS DateTime2), N'EfCreatePieceOfArtCommand', N'{"Id":0,"Name":"Second try","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"card1.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"card1.png\""],"Content-Type":["image/png"]},"Length":18655,"Name":"Picture","FileName":"card1.png"},"CategoryId":1,"UserId":5,"Price":25.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (179, CAST(N'2020-06-27T21:53:43.0232008' AS DateTime2), N'EfCreatePieceOfArtCommand', N'{"Id":0,"Name":"Second try","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"card1.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"card1.png\""],"Content-Type":["image/png"]},"Length":18655,"Name":"Picture","FileName":"card1.png"},"CategoryId":1,"UserId":5,"Price":25.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (180, CAST(N'2020-06-27T21:54:00.0181550' AS DateTime2), N'EfCreatePieceOfArtCommand', N'{"Id":0,"Name":"Second try bla bla","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"card1.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"card1.png\""],"Content-Type":["image/png"]},"Length":18655,"Name":"Picture","FileName":"card1.png"},"CategoryId":1,"UserId":5,"Price":25.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (181, CAST(N'2020-06-27T21:55:01.9002388' AS DateTime2), N'EfCreatePieceOfArtCommand', N'{"Id":0,"Name":"Secondwadwqd","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"card1.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"card1.png\""],"Content-Type":["image/png"]},"Length":18655,"Name":"Picture","FileName":"card1.png"},"CategoryId":1,"UserId":5,"Price":25.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (182, CAST(N'2020-06-27T22:01:38.5841038' AS DateTime2), N'EfCreatePieceOfArtCommand', N'{"Id":0,"Name":"Secondwadwqd","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"card1.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"card1.png\""],"Content-Type":["image/png"]},"Length":18655,"Name":"Picture","FileName":"card1.png"},"CategoryId":1,"UserId":5,"Price":25.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (183, CAST(N'2020-06-27T22:01:58.1264785' AS DateTime2), N'EfCreatePieceOfArtCommand', N'{"Id":0,"Name":"Secondwadwqdfsfrwfef","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"card1.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"card1.png\""],"Content-Type":["image/png"]},"Length":18655,"Name":"Picture","FileName":"card1.png"},"CategoryId":1,"UserId":5,"Price":25.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (184, CAST(N'2020-06-27T23:19:31.1076955' AS DateTime2), N'EfUpdatePieceOfArtCommand', N'{"Id":0,"Name":"Update","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"banner-1.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"banner-1.png\""],"Content-Type":["image/png"]},"Length":100835,"Name":"Picture","FileName":"banner-1.png"},"CategoryId":1,"UserId":5,"Price":25.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (185, CAST(N'2020-06-27T23:20:40.2717126' AS DateTime2), N'EfUpdatePieceOfArtCommand', N'{"Id":0,"Name":"Update","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"banner-1.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"banner-1.png\""],"Content-Type":["image/png"]},"Length":100835,"Name":"Picture","FileName":"banner-1.png"},"CategoryId":1,"UserId":5,"Price":25.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (186, CAST(N'2020-06-27T23:22:50.7536188' AS DateTime2), N'EfUpdatePieceOfArtCommand', N'{"Id":5,"Name":"Update","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"banner-1.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"banner-1.png\""],"Content-Type":["image/png"]},"Length":100835,"Name":"Picture","FileName":"banner-1.png"},"CategoryId":1,"UserId":5,"Price":25.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (187, CAST(N'2020-06-27T23:24:30.7010830' AS DateTime2), N'EfUpdatePieceOfArtCommand', N'{"Id":5,"Name":"Updatewewee","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"banner-1.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"banner-1.png\""],"Content-Type":["image/png"]},"Length":100835,"Name":"Picture","FileName":"banner-1.png"},"CategoryId":1,"UserId":5,"Price":25.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (188, CAST(N'2020-06-27T23:26:53.7538489' AS DateTime2), N'EfUpdatePieceOfArtCommand', N'{"Id":5,"Name":"Updatewewee","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"banner-1.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"banner-1.png\""],"Content-Type":["image/png"]},"Length":100835,"Name":"Picture","FileName":"banner-1.png"},"CategoryId":1,"UserId":5,"Price":25.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (189, CAST(N'2020-06-27T23:27:14.3854638' AS DateTime2), N'EfUpdatePieceOfArtCommand', N'{"Id":5,"Name":"Updateweweewdwd","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"banner-1.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"banner-1.png\""],"Content-Type":["image/png"]},"Length":100835,"Name":"Picture","FileName":"banner-1.png"},"CategoryId":1,"UserId":5,"Price":25.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (190, CAST(N'2020-06-27T23:29:10.2454797' AS DateTime2), N'EfUpdatePieceOfArtCommand', N'{"Id":5,"Name":"Updateweweewdwd","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"banner-1.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"banner-1.png\""],"Content-Type":["image/png"]},"Length":100835,"Name":"Picture","FileName":"banner-1.png"},"CategoryId":1,"UserId":5,"Price":25.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (191, CAST(N'2020-06-27T23:29:26.8208892' AS DateTime2), N'EfUpdatePieceOfArtCommand', N'{"Id":6,"Name":"Updateweweewdwdssssssswwwww","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"banner-1.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"banner-1.png\""],"Content-Type":["image/png"]},"Length":100835,"Name":"Picture","FileName":"banner-1.png"},"CategoryId":1,"UserId":5,"Price":25.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (192, CAST(N'2020-06-27T23:29:31.1783028' AS DateTime2), N'EfUpdatePieceOfArtCommand', N'{"Id":6,"Name":"Updateweweewdwdssssssswwwww","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"banner-1.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"banner-1.png\""],"Content-Type":["image/png"]},"Length":100835,"Name":"Picture","FileName":"banner-1.png"},"CategoryId":1,"UserId":5,"Price":25.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (193, CAST(N'2020-06-27T23:30:13.9364452' AS DateTime2), N'EfUpdatePieceOfArtCommand', N'{"Id":10,"Name":"PrimerJosJEdan","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"banner-1.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"banner-1.png\""],"Content-Type":["image/png"]},"Length":100835,"Name":"Picture","FileName":"banner-1.png"},"CategoryId":1,"UserId":5,"Price":85.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (194, CAST(N'2020-06-27T23:33:42.1061734' AS DateTime2), N'EfUpdatePieceOfArtCommand', N'{"Id":10,"Name":"PrimerJosJEdanssss","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"banner-1.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"banner-1.png\""],"Content-Type":["image/png"]},"Length":100835,"Name":"Picture","FileName":"banner-1.png"},"CategoryId":1,"UserId":5,"Price":85.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (195, CAST(N'2020-06-27T23:33:53.2252460' AS DateTime2), N'EfUpdatePieceOfArtCommand', N'{"Id":6,"Name":"PrimerJosJEdansssssas","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"banner-1.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"banner-1.png\""],"Content-Type":["image/png"]},"Length":100835,"Name":"Picture","FileName":"banner-1.png"},"CategoryId":1,"UserId":5,"Price":85.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (196, CAST(N'2020-06-27T23:34:09.2559804' AS DateTime2), N'EfUpdatePieceOfArtCommand', N'{"Id":9,"Name":"PrimerJosJEdansssssas","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"banner-1.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"banner-1.png\""],"Content-Type":["image/png"]},"Length":100835,"Name":"Picture","FileName":"banner-1.png"},"CategoryId":1,"UserId":5,"Price":85.0}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (197, CAST(N'2020-06-27T23:42:32.6169470' AS DateTime2), N'EfDeletePieceOfArtCommand', N'9', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (198, CAST(N'2020-06-27T23:43:06.2243873' AS DateTime2), N'EfDeletePieceOfArtCommand', N'9', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (199, CAST(N'2020-06-27T23:43:16.4284149' AS DateTime2), N'EfDeletePieceOfArtCommand', N'6', N'filip.minic.138.17@ict.edu.rs')
+GO
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (200, CAST(N'2020-06-28T00:01:53.4554145' AS DateTime2), N'EfGetPieceOfArtsQuery', N'{"Name":"a","PerPage":2,"Page":1}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (201, CAST(N'2020-06-28T00:02:09.6441007' AS DateTime2), N'EfGetPieceOfArtsQuery', N'{"Name":"a","PerPage":5,"Page":1}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (202, CAST(N'2020-06-28T00:03:07.1196002' AS DateTime2), N'EfGetPieceOfArtsQuery', N'{"Name":"a","PerPage":5,"Page":1}', N'filip.minic.138.17@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (203, CAST(N'2020-06-28T00:27:20.8964741' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'10', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (204, CAST(N'2020-06-28T01:55:15.6244830' AS DateTime2), N'EfDeletePersonalPieceOfArtCommand', N'9', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (205, CAST(N'2020-06-28T01:55:30.0599590' AS DateTime2), N'EfDeletePersonalPieceOfArtCommand', N'10', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (206, CAST(N'2020-06-28T01:55:55.2240313' AS DateTime2), N'EfDeletePersonalPieceOfArtCommand', N'5', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (207, CAST(N'2020-06-28T01:57:38.7477337' AS DateTime2), N'EfDeletePersonalPieceOfArtCommand', N'4', N'kristina85@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (208, CAST(N'2020-06-28T02:10:19.8496518' AS DateTime2), N'EfUpdatePersonalPieceOfArtCommand', N'{"Id":2,"Name":"PersonalUpdateTwo","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"footer_logo.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"footer_logo.png\""],"Content-Type":["image/png"]},"Length":22383,"Name":"Picture","FileName":"footer_logo.png"},"CategoryId":1,"UserId":0,"Price":105.0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (209, CAST(N'2020-06-28T02:11:42.6144492' AS DateTime2), N'EfCreatePieceOfArtCommand', N'{"Id":0,"Name":"New Insert","Description":"Minimum  1555555 karaktera test prob","Year":1885,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"card1.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"card1.png\""],"Content-Type":["image/png"]},"Length":18655,"Name":"Picture","FileName":"card1.png"},"CategoryId":1,"UserId":0,"Price":18.0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (210, CAST(N'2020-06-28T02:12:00.8551904' AS DateTime2), N'EfCreatePieceOfArtCommand', N'{"Id":0,"Name":"New Insert","Description":"Minimum  1555555 karaktera test prob","Year":1885,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"card1.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"card1.png\""],"Content-Type":["image/png"]},"Length":18655,"Name":"Picture","FileName":"card1.png"},"CategoryId":1,"UserId":0,"Price":18.0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (211, CAST(N'2020-06-28T02:13:03.6700140' AS DateTime2), N'EfCreatePieceOfArtCommand', N'{"Id":0,"Name":"New Insert","Description":"Minimum  1555555 karaktera test prob","Year":1885,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"card1.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"card1.png\""],"Content-Type":["image/png"]},"Length":18655,"Name":"Picture","FileName":"card1.png"},"CategoryId":1,"UserId":5,"Price":18.0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (212, CAST(N'2020-06-28T02:13:41.6084967' AS DateTime2), N'EfUpdatePersonalPieceOfArtCommand', N'{"Id":13,"Name":"PrimerImenaupdatejednog","Description":"vffvsjvnfivnisnvifuvnsiufnvisnfviusfnviufsnvisvusvnisui","Year":1998,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"footer_logo.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"footer_logo.png\""],"Content-Type":["image/png"]},"Length":22383,"Name":"Picture","FileName":"footer_logo.png"},"CategoryId":0,"UserId":0,"Price":44.0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (213, CAST(N'2020-06-28T02:14:10.5999929' AS DateTime2), N'EfUpdatePersonalPieceOfArtCommand', N'{"Id":13,"Name":"PrimerImenaupdatejednogdsdsdsd","Description":"vffvsjvnfivnisnvifuvnsiufnvisnfviusfnviufsnvisvusvnisui","Year":1998,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"footer_logo.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"footer_logo.png\""],"Content-Type":["image/png"]},"Length":22383,"Name":"Picture","FileName":"footer_logo.png"},"CategoryId":1,"UserId":0,"Price":44.0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (214, CAST(N'2020-06-28T02:14:42.0050636' AS DateTime2), N'EfUpdatePersonalPieceOfArtCommand', N'{"Id":4,"Name":"PrimerImenaupdatejednogdsdsdsd","Description":"vffvsjvnfivnisnvifuvnsiufnvisnfviusfnviufsnvisvusvnisui","Year":1998,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"footer_logo.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"footer_logo.png\""],"Content-Type":["image/png"]},"Length":22383,"Name":"Picture","FileName":"footer_logo.png"},"CategoryId":1,"UserId":0,"Price":44.0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (215, CAST(N'2020-06-28T02:14:48.5165628' AS DateTime2), N'EfUpdatePersonalPieceOfArtCommand', N'{"Id":1,"Name":"PrimerImenaupdatejednogdsdsdsd","Description":"vffvsjvnfivnisnvifuvnsiufnvisnfviusfnviufsnvisvusvnisui","Year":1998,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"footer_logo.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"footer_logo.png\""],"Content-Type":["image/png"]},"Length":22383,"Name":"Picture","FileName":"footer_logo.png"},"CategoryId":1,"UserId":0,"Price":44.0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (216, CAST(N'2020-06-28T02:18:18.6077387' AS DateTime2), N'EfUpdatePersonalPieceOfArtCommand', N'{"Id":13,"Name":"PersonalUpdateTwo","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"footer_logo.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"footer_logo.png\""],"Content-Type":["image/png"]},"Length":22383,"Name":"Picture","FileName":"footer_logo.png"},"CategoryId":1,"UserId":0,"Price":105.0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (217, CAST(N'2020-06-28T02:18:45.0107392' AS DateTime2), N'EfUpdatePersonalPieceOfArtCommand', N'{"Id":10,"Name":"PersonalUpdateTwo","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"footer_logo.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"footer_logo.png\""],"Content-Type":["image/png"]},"Length":22383,"Name":"Picture","FileName":"footer_logo.png"},"CategoryId":1,"UserId":0,"Price":105.0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (218, CAST(N'2020-06-28T02:21:15.2959213' AS DateTime2), N'EfUpdatePersonalPieceOfArtCommand', N'{"Id":10,"Name":"PersonalUpdateTwoSasasasas","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"footer_logo.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"footer_logo.png\""],"Content-Type":["image/png"]},"Length":22383,"Name":"Picture","FileName":"footer_logo.png"},"CategoryId":1,"UserId":0,"Price":105.0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (219, CAST(N'2020-06-28T02:22:29.3557843' AS DateTime2), N'EfUpdatePersonalPieceOfArtCommand', N'{"Id":10,"Name":"PersonalUpdateTwoSasasasas","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"footer_logo.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"footer_logo.png\""],"Content-Type":["image/png"]},"Length":22383,"Name":"Picture","FileName":"footer_logo.png"},"CategoryId":1,"UserId":0,"Price":111.0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (220, CAST(N'2020-06-28T02:25:16.0147769' AS DateTime2), N'EfUpdatePersonalPieceOfArtCommand', N'{"Id":10,"Name":"Personakiiiiicaaaaaaaaas","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"footer_logo.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"footer_logo.png\""],"Content-Type":["image/png"]},"Length":22383,"Name":"Picture","FileName":"footer_logo.png"},"CategoryId":1,"UserId":5,"Price":112.0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (221, CAST(N'2020-06-28T02:42:42.5463025' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'4', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (222, CAST(N'2020-06-28T02:44:34.4177479' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'4', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (223, CAST(N'2020-06-28T02:46:05.7007126' AS DateTime2), N'EfGetOneCategoryQuery', N'4', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (224, CAST(N'2020-06-28T02:46:15.5016943' AS DateTime2), N'EfGetOneCategoryQuery', N'1', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (225, CAST(N'2020-06-28T02:48:57.4569143' AS DateTime2), N'EfGetOneCategoryQuery', N'1', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (226, CAST(N'2020-06-28T02:50:18.0530961' AS DateTime2), N'EfGetOneCategoryQuery', N'1', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (227, CAST(N'2020-06-28T02:53:21.6528068' AS DateTime2), N'EfGetOneCategoryQuery', N'1', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (228, CAST(N'2020-06-28T02:58:41.2721080' AS DateTime2), N'EfGetOneCategoryQuery', N'1', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (229, CAST(N'2020-06-28T11:12:00.0702391' AS DateTime2), N'EfUpdatePersonalPieceOfArtCommand', N'{"Id":10,"Name":"Personakiiiiicaaaaaaaaas","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"footer_logo.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"footer_logo.png\""],"Content-Type":["image/png"]},"Length":22383,"Name":"Picture","FileName":"footer_logo.png"},"CategoryId":1,"UserId":5,"Price":112.0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (230, CAST(N'2020-06-28T11:12:16.9847679' AS DateTime2), N'EfUpdatePersonalPieceOfArtCommand', N'{"Id":10,"Name":"ssssss","Description":"Minimum  15 karaktera test prob","Year":1888,"Picture":{"ContentDisposition":"form-data; name=\"Picture\"; filename=\"footer_logo.png\"","ContentType":"image/png","Headers":{"Content-Disposition":["form-data; name=\"Picture\"; filename=\"footer_logo.png\""],"Content-Type":["image/png"]},"Length":22383,"Name":"Picture","FileName":"footer_logo.png"},"CategoryId":1,"UserId":5,"Price":112.0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (231, CAST(N'2020-06-28T11:12:35.2478603' AS DateTime2), N'EfGetOneCategoryQuery', N'1', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (232, CAST(N'2020-06-28T11:14:05.9523186' AS DateTime2), N'EfGetOneCategoryQuery', N'1', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (233, CAST(N'2020-06-28T11:22:04.5061808' AS DateTime2), N'EfGetOneCategoryQuery', N'1', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (234, CAST(N'2020-06-28T11:23:53.0181650' AS DateTime2), N'EfGetOneCategoryQuery', N'1', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (235, CAST(N'2020-06-28T22:14:46.6010064' AS DateTime2), N'EfCreateCommentCommand', N'{"Id":0,"Text":"PrimerKomentar","PieceOfArtId":13,"ParentId":null,"UserId":0}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (236, CAST(N'2020-06-28T22:17:45.3653412' AS DateTime2), N'EfCreateCommentCommand', N'{"Id":null,"Text":"PrimerKomentar","PieceOfArtId":13,"ParentId":null,"UserId":0}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (237, CAST(N'2020-06-28T22:22:27.1925338' AS DateTime2), N'EfCreateCommentCommand', N'{"Id":0,"Text":"PrimerKomentar","PieceOfArtId":13,"ParentId":null,"UserId":0}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (238, CAST(N'2020-06-28T22:23:23.7683804' AS DateTime2), N'EfCreateCommentCommand', N'{"Id":0,"Text":"PrimerKomentar","PieceOfArtId":13,"ParentId":null,"UserId":0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (239, CAST(N'2020-06-28T22:26:05.8746796' AS DateTime2), N'EfCreateCommentCommand', N'{"Id":0,"Text":"PrimerKomentar","PieceOfArtId":13,"ParentId":null,"UserId":0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (240, CAST(N'2020-06-28T22:26:16.3306063' AS DateTime2), N'EfCreateCommentCommand', N'{"Id":0,"Text":"PrimerKomentarDrugi","PieceOfArtId":13,"ParentId":null,"UserId":0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (241, CAST(N'2020-06-28T22:26:21.8118662' AS DateTime2), N'EfCreateCommentCommand', N'{"Id":0,"Text":"PrimerKomentarDrugiTreciiii","PieceOfArtId":13,"ParentId":null,"UserId":0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (242, CAST(N'2020-06-28T22:26:28.4674610' AS DateTime2), N'EfCreateCommentCommand', N'{"Id":0,"Text":"PrimerKomentarDrugiTreciiiiWwewewew","PieceOfArtId":13,"ParentId":null,"UserId":0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (243, CAST(N'2020-06-28T22:26:34.5867063' AS DateTime2), N'EfCreateCommentCommand', N'{"Id":0,"Text":"ASp","PieceOfArtId":13,"ParentId":null,"UserId":0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (244, CAST(N'2020-06-28T22:27:17.5392968' AS DateTime2), N'EfCreateCommentCommand', N'{"Id":0,"Text":"ASpPodfwffdsfdsfdfsfdsfs","PieceOfArtId":13,"ParentId":2,"UserId":0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (245, CAST(N'2020-06-28T22:27:27.0290080' AS DateTime2), N'EfCreateCommentCommand', N'{"Id":0,"Text":"Aswdwdwdwd","PieceOfArtId":13,"ParentId":1,"UserId":0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (246, CAST(N'2020-06-28T22:27:34.9761152' AS DateTime2), N'EfCreateCommentCommand', N'{"Id":0,"Text":"Primerdadadad","PieceOfArtId":13,"ParentId":2,"UserId":0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (247, CAST(N'2020-06-28T22:27:41.6542373' AS DateTime2), N'EfCreateCommentCommand', N'{"Id":0,"Text":"Exampledsdsd","PieceOfArtId":13,"ParentId":2,"UserId":0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (248, CAST(N'2020-06-28T22:27:49.8130639' AS DateTime2), N'EfCreateCommentCommand', N'{"Id":0,"Text":"Kicakiciac","PieceOfArtId":13,"ParentId":1,"UserId":0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (249, CAST(N'2020-06-28T22:27:59.3754853' AS DateTime2), N'EfCreateCommentCommand', N'{"Id":0,"Text":"See","PieceOfArtId":13,"ParentId":null,"UserId":0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (250, CAST(N'2020-06-28T22:28:03.5343181' AS DateTime2), N'EfCreateCommentCommand', N'{"Id":0,"Text":"Moon","PieceOfArtId":13,"ParentId":null,"UserId":0}', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (251, CAST(N'2020-06-28T22:29:44.6781244' AS DateTime2), N'EfDeleteCommentCommand', N'10', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (252, CAST(N'2020-06-28T22:30:07.2158855' AS DateTime2), N'EfDeletePersonalCommentCommand', N'11', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (253, CAST(N'2020-06-28T22:30:13.4519568' AS DateTime2), N'EfDeletePersonalCommentCommand', N'10', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (254, CAST(N'2020-06-28T22:31:36.9342445' AS DateTime2), N'EfDeletePersonalCommentCommand', N'8', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (255, CAST(N'2020-06-28T22:32:12.2684974' AS DateTime2), N'EfDeleteCommentCommand', N'8', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (256, CAST(N'2020-06-28T22:32:31.6449029' AS DateTime2), N'EfUpdateCommentCommand', N'{"Id":7,"Text":"sasfdfadfdfaf","PieceOfArtId":13,"ParentId":null,"UserId":0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (257, CAST(N'2020-06-28T22:33:10.1582294' AS DateTime2), N'EfUpdateCommentCommand', N'{"Id":7,"Text":"sasfdfadfdfaf","PieceOfArtId":13,"ParentId":null,"UserId":0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (258, CAST(N'2020-06-28T22:39:43.9437862' AS DateTime2), N'EfUpdateCommentCommand', N'{"Id":7,"Text":"UpdateheckOut","PieceOfArtId":13,"ParentId":null,"UserId":0}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (259, CAST(N'2020-06-28T22:45:01.6720116' AS DateTime2), N'EfUpdateCommentCommand', N'{"Id":7,"Text":"UpdateheckOut","PieceOfArtId":13,"ParentId":null,"UserId":5}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (260, CAST(N'2020-06-28T22:45:35.6487735' AS DateTime2), N'EfUpdateCommentCommand', N'{"Id":8,"Text":"UpdateheckOutsdas","PieceOfArtId":13,"ParentId":null,"UserId":5}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (261, CAST(N'2020-06-28T22:46:56.0629089' AS DateTime2), N'EfUpdateCommentCommand', N'{"Id":5,"Text":"UpdateheckOutsdas","PieceOfArtId":13,"ParentId":null,"UserId":5}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (262, CAST(N'2020-06-28T22:47:11.1432167' AS DateTime2), N'EfUpdateCommentCommand', N'{"Id":4,"Text":"UpdateheckOutsdas","PieceOfArtId":13,"ParentId":null,"UserId":5}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (263, CAST(N'2020-06-28T22:47:26.3015240' AS DateTime2), N'EfUpdateCommentCommand', N'{"Id":3,"Text":"UpdateheckOutsdas","PieceOfArtId":13,"ParentId":null,"UserId":5}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (264, CAST(N'2020-06-28T23:52:50.9619475' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'10', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (265, CAST(N'2020-06-28T23:53:01.7104018' AS DateTime2), N'EfGetPieceOfArtsQuery', N'{"Name":null,"PerPage":2,"Page":1}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (266, CAST(N'2020-06-28T23:53:26.5789930' AS DateTime2), N'EfGetPieceOfArtsQuery', N'{"Name":null,"PerPage":8,"Page":1}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (267, CAST(N'2020-06-28T23:54:25.0038768' AS DateTime2), N'EfGetPieceOfArtsQuery', N'{"Name":null,"PerPage":2,"Page":1}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (268, CAST(N'2020-06-28T23:54:55.6671877' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'13', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (269, CAST(N'2020-06-28T23:56:37.1410035' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'13', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (270, CAST(N'2020-06-29T00:03:01.3254062' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'13', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (271, CAST(N'2020-06-29T00:03:38.1908287' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'13', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (272, CAST(N'2020-06-29T00:08:20.6356910' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'13', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (273, CAST(N'2020-06-29T00:14:15.9484640' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'13', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (274, CAST(N'2020-06-29T00:16:09.5737707' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'13', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (275, CAST(N'2020-06-29T00:19:07.0961219' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'13', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (276, CAST(N'2020-06-29T00:19:35.8077085' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'13', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (277, CAST(N'2020-06-29T00:23:17.7602363' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'10', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (278, CAST(N'2020-06-29T00:23:41.9065711' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'13', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (279, CAST(N'2020-06-29T00:27:42.5424932' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'13', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (280, CAST(N'2020-06-29T17:50:49.9106140' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'13', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (281, CAST(N'2020-06-29T19:00:51.5593384' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'13', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (282, CAST(N'2020-06-29T19:03:18.8789054' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'13', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (283, CAST(N'2020-06-29T19:10:28.4803391' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'13', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (284, CAST(N'2020-06-29T19:38:28.4867523' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'13', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (285, CAST(N'2020-06-29T22:37:43.4561378' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'13', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (286, CAST(N'2020-06-29T23:17:42.7797875' AS DateTime2), N'EfLikePostCommand', N'{"UserId":5,"PieceOfArtId":1,"Status":2}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (287, CAST(N'2020-06-29T23:19:04.8863327' AS DateTime2), N'EfLikePostCommand', N'{"UserId":5,"PieceOfArtId":13,"Status":2}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (288, CAST(N'2020-06-29T23:19:28.2367874' AS DateTime2), N'EfLikePostCommand', N'{"UserId":5,"PieceOfArtId":1,"Status":2}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (289, CAST(N'2020-06-29T23:19:31.5934628' AS DateTime2), N'EfLikePostCommand', N'{"UserId":5,"PieceOfArtId":2,"Status":2}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (290, CAST(N'2020-06-29T23:19:41.4620529' AS DateTime2), N'EfLikePostCommand', N'{"UserId":5,"PieceOfArtId":3,"Status":2}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (291, CAST(N'2020-06-29T23:19:51.5816324' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'13', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (292, CAST(N'2020-06-29T23:20:06.3037607' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'13', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (293, CAST(N'2020-06-29T23:20:17.5333742' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'13', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (294, CAST(N'2020-06-29T23:20:41.7063864' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'13', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (295, CAST(N'2020-06-29T23:25:14.2947145' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'13', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (296, CAST(N'2020-06-29T23:25:54.0329538' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'1', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (297, CAST(N'2020-06-29T23:26:04.6642231' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'2', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (298, CAST(N'2020-06-29T23:26:09.8735889' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'3', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (299, CAST(N'2020-06-29T23:27:18.6229791' AS DateTime2), N'EfLikePostCommand', N'{"UserId":0,"PieceOfArtId":3,"Status":2}', N'Neautorizovan korisnik.')
+GO
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (300, CAST(N'2020-06-29T23:27:42.7817365' AS DateTime2), N'EfLikePostCommand', N'{"UserId":5,"PieceOfArtId":3,"Status":2}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (301, CAST(N'2020-06-29T23:27:54.1687197' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'3', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (302, CAST(N'2020-06-29T23:38:03.9197659' AS DateTime2), N'EfLikePostCommand', N'{"UserId":5,"PieceOfArtId":3,"Status":2}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (303, CAST(N'2020-06-29T23:38:11.0019110' AS DateTime2), N'EfLikePostCommand', N'{"UserId":5,"PieceOfArtId":13,"Status":1}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (304, CAST(N'2020-06-29T23:38:15.7261442' AS DateTime2), N'EfLikePostCommand', N'{"UserId":5,"PieceOfArtId":13,"Status":3}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (305, CAST(N'2020-06-29T23:38:28.6821202' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'3', N'Neautorizovan korisnik.')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (306, CAST(N'2020-06-29T23:38:45.3796905' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'3', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (307, CAST(N'2020-06-29T23:38:54.0756483' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'13', N'kicakicic.199@ict.edu.rs')
+SET IDENTITY_INSERT [dbo].[UseCaseLogs] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Users] ON 
+
+INSERT [dbo].[Users] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [FirstName], [LastName], [Email], [Password], [PhoneNumber], [CountryId]) VALUES (3, CAST(N'2020-06-25T22:28:40.2370026' AS DateTime2), NULL, 0, NULL, N'Keira', N'Johnston', N'kerirj@gmail.com', N'5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', NULL, 1)
+INSERT [dbo].[Users] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [FirstName], [LastName], [Email], [Password], [PhoneNumber], [CountryId]) VALUES (4, CAST(N'2020-06-25T22:28:40.2370026' AS DateTime2), NULL, 0, NULL, N'Dell', N'Grady', N'dellgrady@gmail.com', N'5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', N'1259425', 1)
+INSERT [dbo].[Users] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [FirstName], [LastName], [Email], [Password], [PhoneNumber], [CountryId]) VALUES (5, CAST(N'2020-06-24T00:01:26.0023374' AS DateTime2), NULL, 0, NULL, N'Admin', N'Admin', N'kicakicic.199@ict.edu.rs', N'5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', NULL, 1)
+INSERT [dbo].[Users] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [FirstName], [LastName], [Email], [Password], [PhoneNumber], [CountryId]) VALUES (6, CAST(N'2020-06-25T01:46:53.0796279' AS DateTime2), CAST(N'2020-06-25T02:02:04.0917495' AS DateTime2), 1, CAST(N'2020-06-25T02:02:04.0682374' AS DateTime2), N'Addie', N'Hurle', N'addieh@gmail.com', N'5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', NULL, 2)
+INSERT [dbo].[Users] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [FirstName], [LastName], [Email], [Password], [PhoneNumber], [CountryId]) VALUES (8, CAST(N'2020-06-25T22:28:40.2370026' AS DateTime2), NULL, 0, NULL, N'Cory', N'Walsh', N'corywash@gmail.com', N'5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', N'45962425', 4)
+INSERT [dbo].[Users] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [FirstName], [LastName], [Email], [Password], [PhoneNumber], [CountryId]) VALUES (9, CAST(N'2020-06-25T22:31:06.1761321' AS DateTime2), CAST(N'2020-06-25T22:52:53.3576343' AS DateTime2), 0, NULL, N'Ethyl', N'Prosacco', N'prossacoo@gmail.com', N'5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', N'05418952', 4)
+INSERT [dbo].[Users] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [FirstName], [LastName], [Email], [Password], [PhoneNumber], [CountryId]) VALUES (22, CAST(N'2020-06-22T22:31:06.1761321' AS DateTime2), NULL, 0, NULL, N'Alexandre', N'Coy', N'coy@gmail.com', N'5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', N'062101885', 9)
+INSERT [dbo].[Users] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [FirstName], [LastName], [Email], [Password], [PhoneNumber], [CountryId]) VALUES (25, CAST(N'2020-06-19T22:31:06.1761321' AS DateTime2), NULL, 0, NULL, N'Griffin', N'Cov', N'grif23@gmail.com', N'5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', NULL, 11)
+INSERT [dbo].[Users] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [FirstName], [LastName], [Email], [Password], [PhoneNumber], [CountryId]) VALUES (29, CAST(N'2020-06-18T22:31:06.1761321' AS DateTime2), NULL, 0, NULL, N'Fae', N'Hane', N'hane@gmail.com', N'5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', N'15262994', 8)
+INSERT [dbo].[Users] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [FirstName], [LastName], [Email], [Password], [PhoneNumber], [CountryId]) VALUES (30, CAST(N'2020-06-18T22:31:06.1761321' AS DateTime2), NULL, 0, NULL, N'Kristina', N'Markovic', N'kris@gmail.com', N'5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', N'195229948', 10)
+SET IDENTITY_INSERT [dbo].[Users] OFF
+GO
+SET IDENTITY_INSERT [dbo].[UserUseCases] ON 
+
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (1, 5, 2)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (2, 5, 3)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (3, 5, 4)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (6, 5, 5)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (7, 5, 7)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (8, 5, 8)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (10, 5, 9)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (11, 5, 10)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (12, 5, 11)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (13, 5, 12)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (14, 5, 13)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (15, 5, 14)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (16, 5, 15)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (17, 30, 14)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (18, 30, 16)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (19, 9, 14)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (29, 9, 16)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (30, 9, 25)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (31, 9, 26)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (32, 5, 21)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (33, 5, 22)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (34, 5, 23)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (35, 5, 20)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (36, 5, 24)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (37, 5, 19)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (38, 30, 26)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (39, 30, 27)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (40, 30, 28)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (41, 5, 29)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (42, 30, 30)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (43, 5, 31)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (44, 30, 32)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (45, 30, 33)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (46, 30, 25)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (47, 9, 27)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (48, 9, 28)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (49, 9, 29)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (50, 9, 30)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (52, 9, 32)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (54, 9, 33)
+SET IDENTITY_INSERT [dbo].[UserUseCases] OFF
+GO
+ALTER TABLE [dbo].[Comments]  WITH CHECK ADD  CONSTRAINT [FK_Comments_Comments_ParentId] FOREIGN KEY([ParentId])
+REFERENCES [dbo].[Comments] ([Id])
+GO
+ALTER TABLE [dbo].[Comments] CHECK CONSTRAINT [FK_Comments_Comments_ParentId]
+GO
+ALTER TABLE [dbo].[Comments]  WITH CHECK ADD  CONSTRAINT [FK_Comments_PieceOfArts_PieceOfArtId] FOREIGN KEY([PieceOfArtId])
+REFERENCES [dbo].[PieceOfArts] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Comments] CHECK CONSTRAINT [FK_Comments_PieceOfArts_PieceOfArtId]
+GO
+ALTER TABLE [dbo].[Comments]  WITH CHECK ADD  CONSTRAINT [FK_Comments_Users_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Comments] CHECK CONSTRAINT [FK_Comments_Users_UserId]
+GO
+ALTER TABLE [dbo].[Likes]  WITH CHECK ADD  CONSTRAINT [FK_Likes_PieceOfArts_PieceOfArtId] FOREIGN KEY([PieceOfArtId])
+REFERENCES [dbo].[PieceOfArts] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Likes] CHECK CONSTRAINT [FK_Likes_PieceOfArts_PieceOfArtId]
+GO
+ALTER TABLE [dbo].[Likes]  WITH CHECK ADD  CONSTRAINT [FK_Likes_Users_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Likes] CHECK CONSTRAINT [FK_Likes_Users_UserId]
+GO
+ALTER TABLE [dbo].[PieceOfArts]  WITH CHECK ADD  CONSTRAINT [FK_PieceOfArts_Categories_CategoryId] FOREIGN KEY([CategoryId])
+REFERENCES [dbo].[Categories] ([Id])
+GO
+ALTER TABLE [dbo].[PieceOfArts] CHECK CONSTRAINT [FK_PieceOfArts_Categories_CategoryId]
+GO
+ALTER TABLE [dbo].[PieceOfArts]  WITH CHECK ADD  CONSTRAINT [FK_PieceOfArts_Users_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([Id])
+GO
+ALTER TABLE [dbo].[PieceOfArts] CHECK CONSTRAINT [FK_PieceOfArts_Users_UserId]
+GO
+ALTER TABLE [dbo].[Users]  WITH CHECK ADD  CONSTRAINT [FK_Users_Countries_CountryId] FOREIGN KEY([CountryId])
+REFERENCES [dbo].[Countries] ([Id])
+GO
+ALTER TABLE [dbo].[Users] CHECK CONSTRAINT [FK_Users_Countries_CountryId]
+GO
+ALTER TABLE [dbo].[UserUseCases]  WITH CHECK ADD  CONSTRAINT [FK_UserUseCases_Users_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([Id])
+GO
+ALTER TABLE [dbo].[UserUseCases] CHECK CONSTRAINT [FK_UserUseCases_Users_UserId]
+GO

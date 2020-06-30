@@ -31,7 +31,7 @@ namespace Arts.Implementation.Commands
         public int Id => 1;
         public string Name => "User Registration";
 
-        private IEnumerable<int> useCasesForUser = new List<int> { 1,8,13 };
+        private IEnumerable<int> useCasesForUser = new List<int> { 14, 16, 25, 26, 27, 28, 29, 30, 32, 33 };
 
         public void Execute(RegisterUserDto request)
         {
