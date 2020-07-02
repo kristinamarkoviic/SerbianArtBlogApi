@@ -1,6 +1,84 @@
+USE [master]
+GO
+/****** Object:  Database [arts]    Script Date: 7/2/2020 11:46:27 AM ******/
+CREATE DATABASE [arts]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'arts', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\arts.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'arts_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\arts_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [arts] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [arts].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [arts] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [arts] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [arts] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [arts] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [arts] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [arts] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [arts] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [arts] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [arts] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [arts] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [arts] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [arts] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [arts] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [arts] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [arts] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [arts] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [arts] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [arts] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [arts] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [arts] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [arts] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [arts] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [arts] SET RECOVERY SIMPLE 
+GO
+ALTER DATABASE [arts] SET  MULTI_USER 
+GO
+ALTER DATABASE [arts] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [arts] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [arts] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [arts] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [arts] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [arts] SET QUERY_STORE = OFF
+GO
 USE [arts]
 GO
-/****** Object:  Table [dbo].[__EFMigrationsHistory]    Script Date: 6/30/2020 10:47:01 PM ******/
+/****** Object:  Table [dbo].[__EFMigrationsHistory]    Script Date: 7/2/2020 11:46:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -14,7 +92,7 @@ CREATE TABLE [dbo].[__EFMigrationsHistory](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Categories]    Script Date: 6/30/2020 10:47:01 PM ******/
+/****** Object:  Table [dbo].[Categories]    Script Date: 7/2/2020 11:46:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -32,7 +110,7 @@ CREATE TABLE [dbo].[Categories](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Comments]    Script Date: 6/30/2020 10:47:01 PM ******/
+/****** Object:  Table [dbo].[Comments]    Script Date: 7/2/2020 11:46:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -53,7 +131,7 @@ CREATE TABLE [dbo].[Comments](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Countries]    Script Date: 6/30/2020 10:47:01 PM ******/
+/****** Object:  Table [dbo].[Countries]    Script Date: 7/2/2020 11:46:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -71,7 +149,7 @@ CREATE TABLE [dbo].[Countries](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Likes]    Script Date: 6/30/2020 10:47:01 PM ******/
+/****** Object:  Table [dbo].[Likes]    Script Date: 7/2/2020 11:46:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -91,7 +169,7 @@ CREATE TABLE [dbo].[Likes](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PieceOfArts]    Script Date: 6/30/2020 10:47:01 PM ******/
+/****** Object:  Table [dbo].[PieceOfArts]    Script Date: 7/2/2020 11:46:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -115,7 +193,7 @@ CREATE TABLE [dbo].[PieceOfArts](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UseCaseLogs]    Script Date: 6/30/2020 10:47:01 PM ******/
+/****** Object:  Table [dbo].[UseCaseLogs]    Script Date: 7/2/2020 11:46:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -132,7 +210,7 @@ CREATE TABLE [dbo].[UseCaseLogs](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Users]    Script Date: 6/30/2020 10:47:01 PM ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 7/2/2020 11:46:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -155,7 +233,7 @@ CREATE TABLE [dbo].[Users](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserUseCases]    Script Date: 6/30/2020 10:47:01 PM ******/
+/****** Object:  Table [dbo].[UserUseCases]    Script Date: 7/2/2020 11:46:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -236,6 +314,10 @@ INSERT [dbo].[Likes] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt],
 INSERT [dbo].[Likes] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [UserId], [PieceOfArtId], [Status]) VALUES (7, CAST(N'2020-06-27T00:00:00.0000000' AS DateTime2), NULL, 0, NULL, 9, 22, 1)
 INSERT [dbo].[Likes] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [UserId], [PieceOfArtId], [Status]) VALUES (8, CAST(N'2020-06-27T00:00:00.0000000' AS DateTime2), NULL, 0, NULL, 9, 19, 1)
 INSERT [dbo].[Likes] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [UserId], [PieceOfArtId], [Status]) VALUES (9, CAST(N'2020-06-27T00:00:00.0000000' AS DateTime2), NULL, 0, NULL, 9, 13, 1)
+INSERT [dbo].[Likes] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [UserId], [PieceOfArtId], [Status]) VALUES (10, CAST(N'2020-07-02T11:32:51.9123189' AS DateTime2), NULL, 0, NULL, 44, 40, 2)
+INSERT [dbo].[Likes] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [UserId], [PieceOfArtId], [Status]) VALUES (11, CAST(N'2020-07-02T11:33:15.0084144' AS DateTime2), NULL, 0, NULL, 44, 37, 2)
+INSERT [dbo].[Likes] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [UserId], [PieceOfArtId], [Status]) VALUES (12, CAST(N'2020-07-02T11:33:18.2148083' AS DateTime2), NULL, 0, NULL, 44, 36, 2)
+INSERT [dbo].[Likes] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [UserId], [PieceOfArtId], [Status]) VALUES (13, CAST(N'2020-07-02T11:33:29.4904313' AS DateTime2), NULL, 0, NULL, 44, 35, 1)
 SET IDENTITY_INSERT [dbo].[Likes] OFF
 GO
 SET IDENTITY_INSERT [dbo].[PieceOfArts] ON 
@@ -276,6 +358,21 @@ The painting is varnished for protection and durability......', 2010, N'efa2e7a8
 INSERT [dbo].[PieceOfArts] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name], [Description], [Year], [Picture], [CategoryId], [UserId], [Price]) VALUES (27, CAST(N'2020-06-28T04:13:04.4476624' AS DateTime2), NULL, 0, NULL, N'Urban Love', N'Original acrylic Painting on Hardboard..
 Unframed..Mixed with my handwritten sheets from my notebook ...
 The painting is varnished for protection and durability......', 2019, N'efa2e7a8-a0b5-4d19-bbea-446e605d5e57.png', 4, 29, CAST(47.00 AS Decimal(18, 2)))
+INSERT [dbo].[PieceOfArts] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name], [Description], [Year], [Picture], [CategoryId], [UserId], [Price]) VALUES (29, CAST(N'2020-06-28T04:13:04.4476624' AS DateTime2), NULL, 0, NULL, N'Urban Urban', N'Original', 2016, N'efa2e7a8-a0b5-4d19-bbea-446e605d5e57.png', 4, 29, CAST(65.00 AS Decimal(18, 2)))
+INSERT [dbo].[PieceOfArts] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name], [Description], [Year], [Picture], [CategoryId], [UserId], [Price]) VALUES (32, CAST(N'2020-06-27T23:54:00.1379357' AS DateTime2), NULL, 0, NULL, N'Raw est', N'Original', 2015, N'8fb456fe-aed2-43b0-938d-115aa259c6ba.png', 7, 29, CAST(12.00 AS Decimal(18, 2)))
+INSERT [dbo].[PieceOfArts] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name], [Description], [Year], [Picture], [CategoryId], [UserId], [Price]) VALUES (33, CAST(N'2020-06-27T23:54:00.1379357' AS DateTime2), NULL, 0, NULL, N'We', N'Original', 2014, N'8fb456fe-aed2-43b0-938d-115aa259c6ba.png', 14, 29, CAST(45.00 AS Decimal(18, 2)))
+INSERT [dbo].[PieceOfArts] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name], [Description], [Year], [Picture], [CategoryId], [UserId], [Price]) VALUES (34, CAST(N'2020-06-30T00:00:00.0000000' AS DateTime2), NULL, 0, NULL, N'Saw bird', N'Original acrylic Painting on Hardboard..
+Unframed..Mixed with my handwritten sheets from my notebook ...
+The painting is varnished for protection and durability......', 2015, N'8fb456fe-aed2-43b0-938d-115aa259c6ba.png', 14, 8, CAST(65.00 AS Decimal(18, 2)))
+INSERT [dbo].[PieceOfArts] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name], [Description], [Year], [Picture], [CategoryId], [UserId], [Price]) VALUES (35, CAST(N'2020-06-30T00:00:00.0000000' AS DateTime2), NULL, 0, NULL, N'Sad wolf', N'Original acrylic Painting on Hardboard..
+Unframed..Mixed with my handwritten sheets from my notebook ...
+The painting is varnished for protection and durability......', 2016, N'8fb456fe-aed2-43b0-938d-115aa259c6ba.png', 7, 8, CAST(30.00 AS Decimal(18, 2)))
+INSERT [dbo].[PieceOfArts] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name], [Description], [Year], [Picture], [CategoryId], [UserId], [Price]) VALUES (36, CAST(N'2020-06-27T23:55:04.8002736' AS DateTime2), NULL, 0, NULL, N'Que we', N'Original acrylic Painting on Hardboard..
+Unframed..Mixed with my handwritten sheets from my notebook ...
+The painting is varnished for protection and durability......', 2019, N'8fb456fe-aed2-43b0-938d-115aa259c6ba.png', 14, 9, CAST(61.00 AS Decimal(18, 2)))
+INSERT [dbo].[PieceOfArts] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name], [Description], [Year], [Picture], [CategoryId], [UserId], [Price]) VALUES (37, CAST(N'2020-06-27T23:54:00.1379357' AS DateTime2), NULL, 0, NULL, N'In there', N'Original', 2019, N'8fb456fe-aed2-43b0-938d-115aa259c6ba.png', 4, 9, CAST(25.00 AS Decimal(18, 2)))
+INSERT [dbo].[PieceOfArts] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name], [Description], [Year], [Picture], [CategoryId], [UserId], [Price]) VALUES (38, CAST(N'2020-06-28T04:13:04.4476624' AS DateTime2), NULL, 0, NULL, N'Lol', N'Original', 2019, N'efa2e7a8-a0b5-4d19-bbea-446e605d5e57.png', 9, 9, CAST(24.00 AS Decimal(18, 2)))
+INSERT [dbo].[PieceOfArts] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [Name], [Description], [Year], [Picture], [CategoryId], [UserId], [Price]) VALUES (40, CAST(N'2020-06-27T23:49:46.2482491' AS DateTime2), NULL, 0, NULL, N'Fde', N'Original', 2016, N'efa2e7a8-a0b5-4d19-bbea-446e605d5e57.png', 7, 9, CAST(21.00 AS Decimal(18, 2)))
 SET IDENTITY_INSERT [dbo].[PieceOfArts] OFF
 GO
 SET IDENTITY_INSERT [dbo].[UseCaseLogs] ON 
@@ -590,6 +687,13 @@ INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES
 INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (305, CAST(N'2020-06-29T23:38:28.6821202' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'3', N'Neautorizovan korisnik.')
 INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (306, CAST(N'2020-06-29T23:38:45.3796905' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'3', N'kicakicic.199@ict.edu.rs')
 INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (307, CAST(N'2020-06-29T23:38:54.0756483' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'13', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (308, CAST(N'2020-07-02T09:21:59.4599692' AS DateTime2), N'EfLikePostCommand', N'{"UserId":5,"PieceOfArtId":40,"Status":2}', N'kicakicic.199@ict.edu.rs')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (309, CAST(N'2020-07-02T09:26:19.7699186' AS DateTime2), N'EfLikePostCommand', N'{"UserId":44,"PieceOfArtId":40,"Status":2}', N'bin@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (310, CAST(N'2020-07-02T09:32:51.4787407' AS DateTime2), N'EfLikePostCommand', N'{"UserId":44,"PieceOfArtId":40,"Status":2}', N'bin@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (311, CAST(N'2020-07-02T09:33:14.9879140' AS DateTime2), N'EfLikePostCommand', N'{"UserId":44,"PieceOfArtId":37,"Status":2}', N'bin@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (312, CAST(N'2020-07-02T09:33:18.1962241' AS DateTime2), N'EfLikePostCommand', N'{"UserId":44,"PieceOfArtId":36,"Status":2}', N'bin@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (313, CAST(N'2020-07-02T09:33:29.4610905' AS DateTime2), N'EfLikePostCommand', N'{"UserId":44,"PieceOfArtId":35,"Status":1}', N'bin@gmail.com')
+INSERT [dbo].[UseCaseLogs] ([Id], [Date], [UseCaseName], [Data], [Actor]) VALUES (314, CAST(N'2020-07-02T09:33:47.0609453' AS DateTime2), N'EfGetOnePieceOfArtQuery', N'13', N'bin@gmail.com')
 SET IDENTITY_INSERT [dbo].[UseCaseLogs] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Users] ON 
@@ -604,6 +708,16 @@ INSERT [dbo].[Users] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt],
 INSERT [dbo].[Users] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [FirstName], [LastName], [Email], [Password], [PhoneNumber], [CountryId]) VALUES (25, CAST(N'2020-06-19T22:31:06.1761321' AS DateTime2), NULL, 0, NULL, N'Griffin', N'Cov', N'grif23@gmail.com', N'5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', NULL, 11)
 INSERT [dbo].[Users] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [FirstName], [LastName], [Email], [Password], [PhoneNumber], [CountryId]) VALUES (29, CAST(N'2020-06-18T22:31:06.1761321' AS DateTime2), NULL, 0, NULL, N'Fae', N'Hane', N'hane@gmail.com', N'5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', N'15262994', 8)
 INSERT [dbo].[Users] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [FirstName], [LastName], [Email], [Password], [PhoneNumber], [CountryId]) VALUES (30, CAST(N'2020-06-18T22:31:06.1761321' AS DateTime2), NULL, 0, NULL, N'Kristina', N'Markovic', N'kris@gmail.com', N'5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', N'195229948', 10)
+INSERT [dbo].[Users] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [FirstName], [LastName], [Email], [Password], [PhoneNumber], [CountryId]) VALUES (32, CAST(N'2020-06-18T22:31:06.1761321' AS DateTime2), NULL, 0, NULL, N'Dustin', N'Zieme', N'zi@gmail.com', N'5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', NULL, 10)
+INSERT [dbo].[Users] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [FirstName], [LastName], [Email], [Password], [PhoneNumber], [CountryId]) VALUES (33, CAST(N'2020-06-28T22:31:06.1761321' AS DateTime2), NULL, 0, NULL, N'Jeffrey', N'Wolff', N'wo@gmail.com', N'5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', NULL, 10)
+INSERT [dbo].[Users] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [FirstName], [LastName], [Email], [Password], [PhoneNumber], [CountryId]) VALUES (35, CAST(N'2020-06-18T22:31:06.1761321' AS DateTime2), NULL, 0, NULL, N'Eric', N'Glover', N'glo@gmail.com', N'5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', NULL, 4)
+INSERT [dbo].[Users] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [FirstName], [LastName], [Email], [Password], [PhoneNumber], [CountryId]) VALUES (36, CAST(N'2020-06-18T22:31:06.1761321' AS DateTime2), NULL, 0, NULL, N'Astrid', N'Astridsds', N'ad@gmail.com', N'5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', NULL, 11)
+INSERT [dbo].[Users] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [FirstName], [LastName], [Email], [Password], [PhoneNumber], [CountryId]) VALUES (38, CAST(N'2020-06-19T00:00:00.0000000' AS DateTime2), NULL, 0, NULL, N'Emilio', N'Sed', N'sed@gmail.com', N'5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', NULL, 11)
+INSERT [dbo].[Users] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [FirstName], [LastName], [Email], [Password], [PhoneNumber], [CountryId]) VALUES (39, CAST(N'2020-06-25T22:31:06.1761321' AS DateTime2), NULL, 0, NULL, N'Monserrate', N'Gusikowski', N'mon@gmail.com', N'5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', NULL, 2)
+INSERT [dbo].[Users] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [FirstName], [LastName], [Email], [Password], [PhoneNumber], [CountryId]) VALUES (40, CAST(N'2020-06-24T00:01:26.0023374' AS DateTime2), NULL, 0, NULL, N'Ronny', N'Runolfsdottir', N'ro@gmail.com', N'5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', NULL, 2)
+INSERT [dbo].[Users] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [FirstName], [LastName], [Email], [Password], [PhoneNumber], [CountryId]) VALUES (41, CAST(N'2020-06-24T00:01:26.0023374' AS DateTime2), NULL, 0, NULL, N'Dave', N'Moore', N'more@gmail.com', N'5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', N'02159599', 2)
+INSERT [dbo].[Users] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [FirstName], [LastName], [Email], [Password], [PhoneNumber], [CountryId]) VALUES (43, CAST(N'2020-06-24T00:01:26.0023374' AS DateTime2), NULL, 0, NULL, N'Ada', N'Langworth', N'ds@gmail.com', N'5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', N'5959592', 9)
+INSERT [dbo].[Users] ([Id], [CreatedAt], [ModifiedAt], [IsDeleted], [DeletedAt], [FirstName], [LastName], [Email], [Password], [PhoneNumber], [CountryId]) VALUES (44, CAST(N'2020-06-22T22:31:06.1761321' AS DateTime2), NULL, 0, NULL, N'Tatum', N'Bins', N'bin@gmail.com', N'5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', N'0622846', 9)
 SET IDENTITY_INSERT [dbo].[Users] OFF
 GO
 SET IDENTITY_INSERT [dbo].[UserUseCases] ON 
@@ -648,7 +762,90 @@ INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (49, 9, 29)
 INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (50, 9, 30)
 INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (52, 9, 32)
 INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (54, 9, 33)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (55, 44, 33)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (56, 44, 28)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (57, 44, 29)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (58, 44, 14)
+INSERT [dbo].[UserUseCases] ([Id], [UserId], [UseCaseId]) VALUES (59, 44, 16)
 SET IDENTITY_INSERT [dbo].[UserUseCases] OFF
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [IX_Categories_Name]    Script Date: 7/2/2020 11:46:28 AM ******/
+CREATE UNIQUE NONCLUSTERED INDEX [IX_Categories_Name] ON [dbo].[Categories]
+(
+	[Name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Comments_ParentId]    Script Date: 7/2/2020 11:46:28 AM ******/
+CREATE NONCLUSTERED INDEX [IX_Comments_ParentId] ON [dbo].[Comments]
+(
+	[ParentId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Comments_PieceOfArtId]    Script Date: 7/2/2020 11:46:28 AM ******/
+CREATE NONCLUSTERED INDEX [IX_Comments_PieceOfArtId] ON [dbo].[Comments]
+(
+	[PieceOfArtId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Comments_UserId]    Script Date: 7/2/2020 11:46:28 AM ******/
+CREATE NONCLUSTERED INDEX [IX_Comments_UserId] ON [dbo].[Comments]
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [IX_Countries_Name]    Script Date: 7/2/2020 11:46:28 AM ******/
+CREATE UNIQUE NONCLUSTERED INDEX [IX_Countries_Name] ON [dbo].[Countries]
+(
+	[Name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Likes_PieceOfArtId]    Script Date: 7/2/2020 11:46:28 AM ******/
+CREATE NONCLUSTERED INDEX [IX_Likes_PieceOfArtId] ON [dbo].[Likes]
+(
+	[PieceOfArtId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Likes_UserId]    Script Date: 7/2/2020 11:46:28 AM ******/
+CREATE NONCLUSTERED INDEX [IX_Likes_UserId] ON [dbo].[Likes]
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_PieceOfArts_CategoryId]    Script Date: 7/2/2020 11:46:28 AM ******/
+CREATE NONCLUSTERED INDEX [IX_PieceOfArts_CategoryId] ON [dbo].[PieceOfArts]
+(
+	[CategoryId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_PieceOfArts_UserId]    Script Date: 7/2/2020 11:46:28 AM ******/
+CREATE NONCLUSTERED INDEX [IX_PieceOfArts_UserId] ON [dbo].[PieceOfArts]
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Users_CountryId]    Script Date: 7/2/2020 11:46:28 AM ******/
+CREATE NONCLUSTERED INDEX [IX_Users_CountryId] ON [dbo].[Users]
+(
+	[CountryId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [IX_Users_Email]    Script Date: 7/2/2020 11:46:28 AM ******/
+CREATE UNIQUE NONCLUSTERED INDEX [IX_Users_Email] ON [dbo].[Users]
+(
+	[Email] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_UserUseCases_UserId]    Script Date: 7/2/2020 11:46:28 AM ******/
+CREATE NONCLUSTERED INDEX [IX_UserUseCases_UserId] ON [dbo].[UserUseCases]
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 ALTER TABLE [dbo].[Comments]  WITH CHECK ADD  CONSTRAINT [FK_Comments_Comments_ParentId] FOREIGN KEY([ParentId])
 REFERENCES [dbo].[Comments] ([Id])
@@ -698,4 +895,8 @@ ALTER TABLE [dbo].[UserUseCases]  WITH CHECK ADD  CONSTRAINT [FK_UserUseCases_Us
 REFERENCES [dbo].[Users] ([Id])
 GO
 ALTER TABLE [dbo].[UserUseCases] CHECK CONSTRAINT [FK_UserUseCases_Users_UserId]
+GO
+USE [master]
+GO
+ALTER DATABASE [arts] SET  READ_WRITE 
 GO
